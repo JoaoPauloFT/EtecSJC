@@ -30,9 +30,10 @@ function graphene_enqueue_customizer_scripts() {
 	wp_enqueue_script( 'jquery-ui-sortable' );
 
 	wp_enqueue_style( 'graphene-chosen', 		GRAPHENE_ROOTURI . '/js/chosen/chosen.css' );
-	wp_enqueue_style( 'graphene-customizer', 	GRAPHENE_ROOTURI . '/admin/customizer/customizer.css', $version );
-	wp_enqueue_style( 'jquery-ui-slider', 		GRAPHENE_ROOTURI . '/js/jquery-ui/jquery.ui.custom.css', array(), false );
+	wp_enqueue_style( 'jquery-ui-slider', 		GRAPHENE_ROOTURI . '/js/jquery-ui/jquery.ui.custom.css' );
 	wp_enqueue_style( 'font-awesome', 			GRAPHENE_ROOTURI . '/fonts/font-awesome/css/font-awesome.min.css' );
+	wp_enqueue_style( 'graphene-customizer', 	GRAPHENE_ROOTURI . '/admin/customizer/customizer.css', array(), $version );
+	if ( is_rtl() ) wp_enqueue_style( 'graphene-customizer-rtl', GRAPHENE_ROOTURI . '/admin/customizer/customizer-rtl.css', array( 'graphene-customizer' ), $version );
 	
 	$l10n_data = array(
 		'chosen_no_search_result'	=> __( 'Oops, nothing found.', 'graphene' ),
@@ -173,6 +174,9 @@ function graphene_get_customizer_transport_settings(){
 		'column_width',
 		
 		'top_bar_bg',
+		'top_bar_fg',
+		'top_bar_link',
+
 		'menu_primary_bg',
 		'menu_primary_item',
 		'menu_primary_active_bg',
@@ -258,6 +262,7 @@ function graphene_get_customizer_validator_settings(){
 
 	/* Slider options */
 	$validator_settings['slider_type']					= 'sanitize_text_field';
+	$validator_settings['slider_post_types']			= 'graphene_validate_multiple_checkboxes';
 	$validator_settings['slider_specific_posts'] 		= 'sanitize_text_field';
     $validator_settings['slider_specific_categories']	= 'graphene_validate_multiple_select';
 	$validator_settings['slider_exclude_categories']	= 'sanitize_text_field';
@@ -282,10 +287,6 @@ function graphene_get_customizer_validator_settings(){
 	/* Footer widget options */
 	$validator_settings['footerwidget_column']	= 'absint';
 		
-	/* Miscellaneous options */
-	$validator_settings['favicon_url']	= 'esc_url_raw';
-	$validator_settings['custom_css']	= 'graphene_validate_css';
-
 	/* Advanced options */
 	$validator_settings['widget_hooks'] = 'graphene_validate_multiple_checkboxes';
 
@@ -322,13 +323,12 @@ function graphene_customizer_filter_settings( $graphene_settings ){
 	}
 	return $graphene_settings;
 }
-add_filter( 'graphene_settings', 'graphene_customizer_filter_settings', 999 );
 
 
 /**
  * Register multiple similar options at once
  */
-function graphene_add_customizer_options( $args = array(), $wp_customize ) {
+function graphene_add_customizer_options( $wp_customize, $args = array() ) {
 	$defaults = array(
 		'type'		=> '',
 		'options'	=> '',
@@ -362,7 +362,6 @@ function graphene_add_customizer_options( $args = array(), $wp_customize ) {
 function graphene_autoptimize_cache_purge( $wp_customize ){
 	if ( class_exists( 'autoptimizeCache' ) ) {
 		autoptimizeCache::clearall();
-		autoptimize_flush_pagecache();
 	}
 }
 add_action( 'customize_save_after', 'graphene_autoptimize_cache_purge' );

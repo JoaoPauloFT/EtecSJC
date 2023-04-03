@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed!' );
 
 /**
  * Post Model class
+ *
  * @package TablePress
  * @subpackage Models
  * @author Tobias Bäthge
@@ -35,7 +36,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->_register_post_type(); // we are on WP "init" hook already
+		$this->_register_post_type(); // We are on WP "init" hook already.
 	}
 
 	/**
@@ -45,7 +46,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 */
 	protected function _register_post_type() {
 		/**
-		 * Filter the "Custom Post Type" that TablePress uses for storing tables in the database.
+		 * Filters the "Custom Post Type" that TablePress uses for storing tables in the database.
 		 *
 		 * @since 1.0.0
 		 *
@@ -66,7 +67,7 @@ class TablePress_Post_Model extends TablePress_Model {
 			'can_export'      => true,
 		);
 		/**
-		 * Filter the arguments for the registration of the "Custom Post Type" that TablePress uses.
+		 * Filters the arguments for the registration of the "Custom Post Type" that TablePress uses.
 		 *
 		 * @since 1.0.0
 		 *
@@ -86,7 +87,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 */
 	public function insert( array $post ) {
 		$default_post = array(
-			'ID'             => false, // false on new insert, but existing post ID on update
+			'ID'             => false, // false on new insert, but existing post ID on update.
 			'comment_status' => 'closed',
 			'ping_status'    => 'closed',
 			'post_category'  => false,
@@ -107,20 +108,37 @@ class TablePress_Post_Model extends TablePress_Model {
 		// Remove balanceTags() from sanitize_post(), as it can destroy the JSON when messing with HTML.
 		remove_filter( 'content_save_pre', 'balanceTags', 50 );
 		remove_filter( 'excerpt_save_pre', 'balanceTags', 50 );
+
 		/*
-		 * Remove possible KSES filtering here, as it can destroy the JSON when messing with HTML.
+		 * Remove possible KSES filtering, as it can destroy the JSON when messing with HTML.
 		 * KSES filtering is done to table cells individually, when saving.
 		 */
-		remove_filter( 'content_save_pre', 'wp_filter_post_kses' );
+		$has_kses = ( false !== has_filter( 'content_save_pre', 'wp_filter_post_kses' ) );
+		if ( $has_kses ) {
+			kses_remove_filters();
+		}
+
+		// Remove filter that adds `rel="noopener" to <a> HTML tags, but destroys JSON code. See https://core.trac.wordpress.org/ticket/46316.
+		$has_targeted_link_rel_filters = ( false !== has_filter( 'content_save_pre', 'wp_targeted_link_rel' ) );
+		if ( $has_targeted_link_rel_filters ) {
+			wp_remove_targeted_link_rel_filters();
+		}
 
 		$post_id = wp_insert_post( $post, true );
 
-		// Re-add balanceTags() to sanitize_post().
+		// Restore removed content filters.
 		add_filter( 'content_save_pre', 'balanceTags', 50 );
 		add_filter( 'excerpt_save_pre', 'balanceTags', 50 );
-		// Re-add KSES filtering, if necessary.
-		if ( ! current_user_can( 'unfiltered_html' ) ) {
-			add_filter( 'content_save_pre', 'wp_filter_post_kses' );
+		if ( $has_kses ) {
+			kses_init_filters();
+		}
+		if ( $has_targeted_link_rel_filters ) {
+			wp_init_targeted_link_rel_filters();
+		}
+
+		// In rare cases, `wp_insert_post()` returns 0 as the post ID, when an error happens, so it's converted to a WP_Error here.
+		if ( 0 === $post_id ) {
+			return new WP_Error( 'table_add_post_insert', '', $post_id );
 		}
 
 		return $post_id;
@@ -136,7 +154,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 */
 	public function update( array $post ) {
 		$default_post = array(
-			'ID'             => false, // false on new insert, but existing post ID on update
+			'ID'             => false, // false on new insert, but existing post ID on update.
 			'comment_status' => 'closed',
 			'ping_status'    => 'closed',
 			'post_category'  => false,
@@ -154,23 +172,35 @@ class TablePress_Post_Model extends TablePress_Model {
 		// WP expects everything to be slashed.
 		$post = wp_slash( $post );
 
-		// Remove balanceTags() from sanitize_post(), as it can destroy the JSON when messing with HTML
+		// Remove balanceTags() from sanitize_post(), as it can destroy the JSON when messing with HTML.
 		remove_filter( 'content_save_pre', 'balanceTags', 50 );
 		remove_filter( 'excerpt_save_pre', 'balanceTags', 50 );
+
 		/*
-		 * Remove possible KSES filtering here, as it can destroy the JSON when messing with HTML
+		 * Remove possible KSES filtering, as it can destroy the JSON when messing with HTML.
 		 * KSES filtering is done to table cells individually, when saving.
 		 */
-		remove_filter( 'content_save_pre', 'wp_filter_post_kses' );
+		$has_kses = ( false !== has_filter( 'content_save_pre', 'wp_filter_post_kses' ) );
+		if ( $has_kses ) {
+			kses_remove_filters();
+		}
+
+		// Remove filter that adds `rel="noopener" to <a> HTML tags, but destroys JSON code. See https://core.trac.wordpress.org/ticket/46316.
+		$has_targeted_link_rel_filters = ( false !== has_filter( 'content_save_pre', 'wp_targeted_link_rel' ) );
+		if ( $has_targeted_link_rel_filters ) {
+			wp_remove_targeted_link_rel_filters();
+		}
 
 		$post_id = wp_update_post( $post, true );
 
-		// Re-add balanceTags() to sanitize_post().
+		// Restore removed content filters.
 		add_filter( 'content_save_pre', 'balanceTags', 50 );
 		add_filter( 'excerpt_save_pre', 'balanceTags', 50 );
-		// Re-add KSES filtering, if necessary.
-		if ( ! current_user_can( 'unfiltered_html' ) ) {
-			add_filter( 'content_save_pre', 'wp_filter_post_kses' );
+		if ( $has_kses ) {
+			kses_init_filters();
+		}
+		if ( $has_targeted_link_rel_filters ) {
+			wp_init_targeted_link_rel_filters();
 		}
 
 		return $post_id;
@@ -182,7 +212,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param int $post_id Post ID.
-	 * @return WP_Post|bool Post on success, false on error.
+	 * @return WP_Post|false Post on success, false on error.
 	 */
 	public function get( $post_id ) {
 		$post = get_post( $post_id );
@@ -198,10 +228,10 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param int $post_id Post ID.
-	 * @return mixed|bool Post on success, false on error.
+	 * @return WP_Post|false|null Post data on success, false or null on failure.
 	 */
 	public function delete( $post_id ) {
-		return wp_delete_post( $post_id, true ); // true means force delete, although for CPTs this is automatic in this function
+		return wp_delete_post( $post_id, true ); // true means force delete, although for CPTs this is automatic in this function.
 	}
 
 	/**
@@ -211,7 +241,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param int $post_id Post ID.
-	 * @return mixed|bool Post on success, false on error.
+	 * @return WP_Post|false|null Post data on success, false or null on failure.
 	 */
 	public function trash( $post_id ) {
 		return wp_trash_post( $post_id );
@@ -224,7 +254,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param int $post_id Post ID.
-	 * @return array|bool Post on success, false on error.
+	 * @return WP_Post|false Post on success, false on error.
 	 */
 	public function untrash( $post_id ) {
 		return wp_untrash_post( $post_id );
@@ -254,6 +284,7 @@ class TablePress_Post_Model extends TablePress_Model {
 			$post_ids = _get_non_cached_ids( $post_ids, 'posts' );
 			if ( ! empty( $post_ids ) ) {
 				$post_ids_list = implode( ',', $post_ids );
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$posts = $wpdb->get_results( "SELECT {$wpdb->posts}.* FROM {$wpdb->posts} WHERE ID IN ({$post_ids_list})" );
 				update_post_cache( $posts );
 				if ( $update_meta_cache ) {
@@ -261,7 +292,7 @@ class TablePress_Post_Model extends TablePress_Model {
 					update_meta_cache( 'post', $post_ids );
 				}
 			}
-			$offset += $length; // next array_slice() $offset
+			$offset += $length; // next array_slice() $offset.
 		}
 	}
 
@@ -274,7 +305,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @return int Number of posts.
 	 */
 	public function count_posts() {
-		return array_sum( (array) wp_count_posts( $this->post_type ) ); // original return value is object with the counts for each post_status
+		return array_sum( (array) wp_count_posts( $this->post_type ) ); // Original return value is object with the counts for each post_status.
 	}
 
 	/**
@@ -290,7 +321,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	public function add_meta_field( $post_id, $field, $value ) {
 		// WP expects a slashed value.
 		$value = wp_slash( $value );
-		$success = add_post_meta( $post_id, $field, $value, true ); // true means unique
+		$success = add_post_meta( $post_id, $field, $value, true ); // true means unique.
 		// Make sure that $success is a boolean, as add_post_meta() returns an ID or false.
 		$success = ( false === $success ) ? false : true;
 		return $success;
@@ -317,7 +348,7 @@ class TablePress_Post_Model extends TablePress_Model {
 
 		// WP expects a slashed value.
 		$value = wp_slash( $value );
-		return update_post_meta( $post_id, $field, $value, $prev_value );
+		return (bool) update_post_meta( $post_id, $field, $value, $prev_value );
 	}
 
 	/**
@@ -330,7 +361,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @return string Value of the meta field.
 	 */
 	public function get_meta_field( $post_id, $field ) {
-		return get_post_meta( $post_id, $field, true ); // true means single value
+		return get_post_meta( $post_id, $field, true ); // true means single value.
 	}
 
 	/**
@@ -344,7 +375,7 @@ class TablePress_Post_Model extends TablePress_Model {
 	 * @return bool True on success, false on error.
 	 */
 	public function delete_meta_field( $post_id, $field ) {
-		return delete_post_meta( $post_id, $field, true ); // true means single value
+		return delete_post_meta( $post_id, $field, true ); // true means single value.
 	}
 
 	/**

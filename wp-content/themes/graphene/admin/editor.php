@@ -6,20 +6,23 @@ function graphene_blocks_dynamic_css(){
 	global $pagenow, $graphene_settings;
 	if ( $pagenow != 'post.php' ) return;
 
-	$content_width = graphene_get_content_width() + 45;
+	$content_width = graphene_get_content_width();
 	$wide_width = floor( $content_width * 1.25 );
 
 	/* Basic editor style */
 	$style = '
-		body.gutenberg-editor-page .editor-post-title__block,
-		body.gutenberg-editor-page .editor-default-block-appender,
-		body.gutenberg-editor-page .editor-block-list__block {
+		body.block-editor-page .editor-post-title__block,
+		body.block-editor-page .editor-default-block-appender,
+		body.block-editor-page .editor-block-list__block,
+		.wp-block {
 		    max-width: ' . $content_width . 'px !important;
 		}
-		body.gutenberg-editor-page .editor-block-list__block[data-align="wide"] {
+		body.block-editor-page .editor-block-list__block[data-align="wide"],
+		.wp-block[data-align="wide"] {
 		    max-width: ' . $wide_width . 'px !important;
 		}
-		.edit-post-visual-editor .editor-block-list__block[data-align=full] {
+		.edit-post-visual-editor .editor-block-list__block[data-align=full],
+		.wp-block[data-align="full"] {
 			max-width: none !important;
 		}
 		.edit-post-layout__metaboxes:not(:empty) {
@@ -39,7 +42,8 @@ function graphene_blocks_dynamic_css(){
 	$style .= graphene_build_style( $colours );
 
 	$colours = array(
-		'button_bg|button_label'=> '.btn, .Button, .colour-preview .button, input[type="submit"], button[type="submit"], #commentform #submit, .wpsc_buy_button, #back-to-top, .wp-block-button .wp-block-button__link:not(.has-background) {background: %1$s; color: %2$s}',
+		'button_bg|button_label'=> '.btn, .Button, .colour-preview .button, input[type="submit"], button[type="submit"], #commentform #submit, .wpsc_buy_button, #back-to-top, .wp-block-button .wp-block-button__link:not(.has-background) {background: %1$s; color: %2$s}
+		.wp-block-button.is-style-outline .wp-block-button__link {background:transparent; border-color: %1$s}',
 	);
 	$style .= graphene_build_style( $colours );
 	

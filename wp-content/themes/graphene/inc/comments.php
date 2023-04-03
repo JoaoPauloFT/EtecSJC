@@ -7,7 +7,7 @@ if ( ! function_exists( 'graphene_comment' ) ) :
 function graphene_comment( $comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment; 
 	?>
-		<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
+		<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'comment' ); ?>>
 			<div class="row">
 				<?php do_action( 'graphene_before_comment' ); ?>
 				
@@ -87,6 +87,7 @@ function graphene_comment_args( $defaults ){
 								<label for="comment" class="sr-only"></label>
 								<textarea name="comment" class="form-control" id="comment" cols="40" rows="10" aria-required="true" placeholder="' . esc_attr__( 'Your message', 'graphene' ) . '"></textarea>
 							</div>',
+		'submit_button'	=> '<input name="%1$s" type="submit" id="%2$s" class="%3$s btn" value="%4$s" />'
 	);
 	return array_merge( $defaults, $args );
 }
@@ -132,8 +133,9 @@ if ( ! function_exists( 'graphene_get_comment_count' ) ) :
 */
 function graphene_get_comment_count( $type = 'comments', $only_approved_comments = true, $top_level = false ){
 	if ( ! get_the_ID() ) return;
-	if 		( $type == 'comments' ) 	$type_sql = 'comment_type = ""';
-	elseif 	( $type == 'pings' )		$type_sql = 'comment_type != ""';
+	if 		( $type == 'comments' ) 	$type_sql = 'comment_type IN ("", "comment")';
+	elseif 	( $type == 'pings' )		$type_sql = 'comment_type IN ("trackback", "pingback")';
+	elseif 	( $type == 'review' ) 		$type_sql = 'comment_type = "review"';
 	elseif 	( $type == 'trackbacks' ) 	$type_sql = 'comment_type = "trackback"';
 	elseif 	( $type == 'pingbacks' )	$type_sql = 'comment_type = "pingback"';
 	
@@ -245,7 +247,7 @@ function graphene_comment_meta( $comment, $args = array(), $depth = 1 ){
     $meta = array();
 
     /* Avatar */
-    if ( ! $comment->comment_type ) {
+    if ( ! $comment->comment_type || $comment->comment_type == 'comment' ) {
 
 		$author_email = $comment->comment_author_email;
 		$avatar = get_avatar( $author_email, 50 );
@@ -261,13 +263,19 @@ function graphene_comment_meta( $comment, $args = array(), $depth = 1 ){
         'class' => 'comment-attr',
         'meta'  => sprintf( __( '%1$s on %2$s <span class="time">at %3$s</span>', 'graphene' ), '<span class="comment-author">' . graphene_comment_author_link( $comment->user_id ) . '</span>', '<span class="comment-date">' . get_comment_date(), get_comment_time() . '</span>' )
     );
+
+    /* Link to comment */
+    $meta['comment-link'] = array(
+        'class' => 'single-comment-link',
+        'meta'  => '<a href="' . get_comment_link( $comment, $args ) . '">#</a>'
+    );
     
     /* Comment by post author */
     if ( $comment->user_id === $post->post_author ) {
         $meta['attr']['meta'] .= '<br /><span class="label label-primary author-cred">' . __( 'Author', 'graphene' ) . '</span>';
     }
 
-	if ( ! $comment->comment_type ) {
+	if ( ! $comment->comment_type || $comment->comment_type == 'comment' ) {
 	    /* Reply link */
 	    $args = array(
 			'depth' 		=> $depth, 
@@ -301,7 +309,7 @@ function graphene_comment_meta( $comment, $args = array(), $depth = 1 ){
  * Modify the HTML output of the comment reply link
  */
 function graphene_comment_reply_link( $link, $args, $comment, $post ){
-	$link = str_replace( 'comment-reply', 'btn btn-white btn-xs comment-reply', $link );
+	$link = str_replace( 'comment-reply', 'btn btn-xs comment-reply', $link );
 	return $link;
 }
 add_filter( 'comment_reply_link', 'graphene_comment_reply_link', 10, 4 );
@@ -311,7 +319,7 @@ add_filter( 'comment_reply_link', 'graphene_comment_reply_link', 10, 4 );
  * Modify the HTML output of the cancel comment reply link
  */
 function graphene_cancel_comment_reply_link( $formatted_link, $link, $text ){
-	$formatted_link = str_replace( '<a', '<a class="btn btn-white btn-sm"', $formatted_link );
+	$formatted_link = str_replace( '<a', '<a class="btn btn-sm"', $formatted_link );
 	return $formatted_link;
 }
 add_filter( 'cancel_comment_reply_link', 'graphene_cancel_comment_reply_link', 10, 3 );

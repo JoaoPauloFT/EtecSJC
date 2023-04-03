@@ -60,7 +60,7 @@ function graphene_save_custom_meta( $post_id ){
 	
 	/* Page-specific options */
 	if ( 'page' == $_POST['post_type']) {
-		if ( $_POST['graphene_nav_description'] )
+		if ( isset( $_POST['graphene_nav_description'] ) )
 			$graphene_meta['nav_description'] = wp_kses_post( $_POST['graphene_nav_description'] );
 	}
 	

@@ -19,6 +19,16 @@ function graphene_customizer_colour_options( $wp_customize ){
 		'label' 	=> __( 'Background', 'graphene' ),
 	) ) );
 
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'graphene_settings[top_bar_fg]', array(
+		'section' 	=> 'graphene-colours-top-bar',
+		'label' 	=> __( 'Foreground', 'graphene' ),
+	) ) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'graphene_settings[top_bar_link]', array(
+		'section' 	=> 'graphene-colours-top-bar',
+		'label' 	=> __( 'Links', 'graphene' ),
+	) ) );
+
 
 	/* =Primary Menu
 	--------------------------------------------------------------------------------------*/
@@ -39,7 +49,13 @@ function graphene_customizer_colour_options( $wp_customize ){
 			'menu_primary_dd_active_item'	=> array( 'label' => __( 'Dropdown menu text (active state)', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+
+	if ( graphene_has_mega_menu( 'Header Menu' ) ) {
+		unset( $options['options']['menu_primary_dd_item'] );
+		unset( $options['options']['menu_primary_dd_active_item'] );
+	}
+
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Secondary Menu
@@ -62,7 +78,7 @@ function graphene_customizer_colour_options( $wp_customize ){
 			'menu_sec_dd_active_item'	=> array( 'label' => __( 'Dropdown menu text (active state)', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Slider
@@ -88,7 +104,7 @@ function graphene_customizer_colour_options( $wp_customize ){
             'slider_card_link'   	=> array( 'label' => __( 'Card display style: links', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Content Area
@@ -113,7 +129,7 @@ function graphene_customizer_colour_options( $wp_customize ){
             'child_page_content_bg' => array( 'label' => __( 'Child pages content background', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Widgets
@@ -132,7 +148,7 @@ function graphene_customizer_colour_options( $wp_customize ){
             'widget_header_border'   => array( 'label' => __( 'Widget header border', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Buttons and Labels
@@ -152,7 +168,7 @@ function graphene_customizer_colour_options( $wp_customize ){
             'label_text'    => array( 'label' => __( 'Label text', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Archives
@@ -172,7 +188,7 @@ function graphene_customizer_colour_options( $wp_customize ){
 		    'archive_text'      => array( 'label' => __( 'Archive label text colour', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Comments Area
@@ -193,7 +209,7 @@ function graphene_customizer_colour_options( $wp_customize ){
             'author_comments_border'    => array( 'label' => __( 'Author comments border', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	/* =Footer
@@ -216,7 +232,7 @@ function graphene_customizer_colour_options( $wp_customize ){
 			'footer_widget_link'    => array( 'label' => __( 'Widget area link text', 'graphene' ) ),
 		)
 	);
-	graphene_add_customizer_options( $options, $wp_customize );
+	graphene_add_customizer_options( $wp_customize, $options );
 
 
 	do_action( 'graphene_customizer_colour_options', $wp_customize );

@@ -4,7 +4,7 @@
  */
 function graphene_export_options(){
 	if ( ! isset( $_GET['graphene-export'] ) ) return;
-    ob_clean();
+    ob_end_clean();
 	
 	/* Check authorisation */
 	$authorised = true;
@@ -134,7 +134,14 @@ function graphene_import_file() {
 	if ( ! function_exists( 'wp_handle_upload' ) ) require_once( ABSPATH . 'wp-admin/includes/file.php' );
 	$file = $_FILES['graphene-import-file'];
 
-	$import_file = wp_handle_upload( $file, array( 'test_form' => false, 'mimes' => array( 'txt' => 'text/plain' ) ) );
+	/* 
+	 * Two tries, first using text/plain and second using text/html. This is because PHP's finfo_open 
+	 * appears to be returning the mime type as text/html in multisite instead of the expected text/plain
+	 */
+	add_filter( 'wp_check_filetype_and_ext', 'graphene_wp_check_filetype_and_ext', 10, 5 );
+	$import_file = wp_handle_upload( $file, array( 'test_form' => false, 'action' => 'graphene_import_file', 'mimes' => array( 'txt' => 'text/plain' ) ) );
+	remove_filter( 'wp_check_filetype_and_ext', 'graphene_wp_check_filetype_and_ext', 10, 5 );
+
 	if ( isset( $import_file['error'] ) ) wp_die( $import_file['error'] );
 
 	/* Get filesystem credentials to read the file */
@@ -162,4 +169,28 @@ function graphene_import_file() {
 	update_option( 'graphene_settings', $settings );
 	$graphene_settings = graphene_get_settings();
 }
-add_action( 'init', 'graphene_import_file' ); 
+add_action( 'init', 'graphene_import_file' );
+
+
+/**
+ * Check for misidentified mime type when importing options file
+ */
+function graphene_wp_check_filetype_and_ext( $wp_filetype, $file, $filename, $mimes, $real_mime = '' ) {
+
+	if ( $wp_filetype['ext'] ) return $wp_filetype;
+
+	if ( ! $real_mime ) {
+		$finfo     = finfo_open( FILEINFO_MIME_TYPE );
+		$real_mime = finfo_file( $finfo, $file );
+		finfo_close( $finfo );
+	}
+
+	$_wp_filetype = wp_check_filetype( $filename, array( 'txt' => 'text/plain' ) );
+
+	if ( $_wp_filetype['ext'] == 'txt' && $_wp_filetype['type'] == 'text/plain' && $real_mime == 'text/html' ) {
+		$wp_filetype = $_wp_filetype;
+		$wp_filetype['proper_filename'] = $filename;
+	}
+
+	return $wp_filetype;
+}

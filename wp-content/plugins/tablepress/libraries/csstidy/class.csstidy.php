@@ -12,110 +12,34 @@
 defined( 'ABSPATH' ) || die( 'No direct script access allowed!' );
 
 /**
- * CSSTidy - CSS Parser and Optimiser
- *
- * CSS Parser class
- *
- * Copyright 2005, 2006, 2007 Florian Schmitz
- *
- * This file is part of CSSTidy.
- *
- *  CSSTidy is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation; either version 2.1 of the License, or
- *  (at your option) any later version.
- *
- *  CSSTidy is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * @license https://opensource.org/licenses/lgpl-license.php GNU Lesser General Public License
- * @package CSSTidy
- * @author Florian Schmitz (floele at gmail dot com) 2005-2007
- * @author Brett Zamir (brettz9 at yahoo dot com) 2007
- * @author Nikolay Matsievsky (speed at webo dot name) 2009-2010
- * @author Cedric Morin (cedric at yterium dot com) 2010-2012
- * @author Christopher Finke (cfinke at gmail.com) 2012
- * @author Mark Scherer (remove $GLOBALS once and for all + PHP5.4 comp) 2012
- */
-
-/**
- * Defines ctype functions if required.
- *
- * @TODO: Make these methods of CSSTidy.
- */
-if ( ! function_exists( 'ctype_space' ) ) {
-	/**
-	 * Check for whitespace character(s).
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $text Text to check.
-	 * @return bool Whether all characters in the string are whitespace characters.
-	 */
-	function ctype_space( $text ) {
-		return ( 1 === preg_match( "/^[ \r\n\t\f]+$/", $text ) );
-	}
-}
-if ( ! function_exists( 'ctype_alpha' ) ) {
-	/**
-	 * Check for alphabetic character(s).
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $text Text to check.
-	 * @return bool Whether all characters in the string are alphabetic characters.
-	 */
-	function ctype_alpha( $text ) {
-		return ( 1 === preg_match( '/^[a-zA-Z]+$/', $text ) );
-	}
-}
-if ( ! function_exists( 'ctype_xdigit' ) ) {
-	/**
-	 * Check for character(s) representing a hexadecimal digit.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $text Text to check.
-	 * @return bool Whether $text is a hexadecimal number.
-	 */
-	function ctype_xdigit( $text ) {
-		return ( 1 === preg_match( '/^[a-fA-F0-9]+$/', $text ) );
-	}
-}
-
-/**
  * Defines constants.
  *
  * @TODO: Make these class constants of CSSTidy.
  * @since 1.0.0
  */
-define( 'AT_START', 1 );
-define( 'AT_END', 2 );
-define( 'SEL_START', 3 );
-define( 'SEL_END', 4 );
-define( 'PROPERTY', 5 );
-define( 'VALUE', 6 );
-define( 'COMMENT', 7 );
-define( 'DEFAULT_AT', 41 );
+define( 'AT_START',          1 );
+define( 'AT_END',            2 );
+define( 'SEL_START',         3 );
+define( 'SEL_END',           4 );
+define( 'PROPERTY',          5 );
+define( 'VALUE',             6 );
+define( 'COMMENT',           7 );
+define( 'IMPORTANT_COMMENT', 8 );
+define( 'DEFAULT_AT',       41 );
 
 /**
  * Load the class for printing CSS code.
  *
  * @since 1.0.0
  */
-require dirname( __FILE__ ) . '/class.csstidy_print.php';
+require __DIR__ . '/class.csstidy_print.php';
 
 /**
  * Load the class for optimising CSS code.
  *
  * @since 1.0.0
  */
-require dirname( __FILE__ ) . '/class.csstidy_optimise.php';
+require __DIR__ . '/class.csstidy_optimise.php';
 
 /**
  * CSS Parser class
@@ -187,14 +111,6 @@ class TablePress_CSSTidy {
 	 * @var string
 	 */
 	public $namespace = '';
-
-	/**
-	 * The CSSTidy version.
-	 *
-	 * @since 1.0.0
-	 * @var string
-	 */
-	public $version = '1.5.3';
 
 	/**
 	 * The settings.
@@ -383,8 +299,7 @@ class TablePress_CSSTidy {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		include dirname( __FILE__ ) . '/data.inc.php';
-		$this->data = $data;
+		$this->data = require __DIR__ . '/data.inc.php';
 
 		$this->settings['remove_bslash'] = true;
 		$this->settings['compress_colors'] = true;
@@ -433,36 +348,13 @@ class TablePress_CSSTidy {
 	 * @since 1.0.0
 	 *
 	 * @param string $setting Setting to get.
-	 * @return string|bool Value of the setting.
+	 * @return string|int|bool Value of the setting.
 	 */
 	public function get_cfg( $setting ) {
 		if ( isset( $this->settings[ $setting ] ) ) {
 			return $this->settings[ $setting ];
 		}
 		return false;
-	}
-
-	/**
-	 * Load a template.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $template Template used by set_cfg to load a template via a configuration setting.
-	 */
-	protected function _load_template( $template ) {
-		switch ( $template ) {
-			case 'default':
-				$this->load_template( 'default' );
-				break;
-			case 'highest':
-			case 'high':
-			case 'low':
-				$this->load_template( $template . '_compression' );
-				break;
-			default:
-				$this->load_template( $template );
-				break;
-		}
 	}
 
 	/**
@@ -475,18 +367,10 @@ class TablePress_CSSTidy {
 	 * @return bool [return value]
 	 */
 	public function set_cfg( $setting, $value = null ) {
-		if ( is_array( $setting ) && is_null( $value ) ) {
-			foreach ( $setting as $setprop => $setval ) {
-				$this->settings[ $setprop ] = $setval;
-			}
-			if ( array_key_exists( 'template', $setting ) ) {
-				$this->_load_template( $this->settings['template'] );
-			}
-			return true;
-		} elseif ( isset( $this->settings[ $setting ] ) && '' !== $value ) {
+		if ( isset( $this->settings[ $setting ] ) && '' !== $value ) {
 			$this->settings[ $setting ] = $value;
 			if ( 'template' === $setting ) {
-				$this->_load_template( $this->settings['template'] );
+				$this->load_template( $this->settings['template'] );
 			}
 			return true;
 		}
@@ -504,7 +388,16 @@ class TablePress_CSSTidy {
 	 */
 	public function _add_token( $type, $data, $do = false ) {
 		if ( $this->get_cfg( 'preserve_css' ) || $do ) {
-			$this->tokens[] = array( $type, ( COMMENT === $type ) ? $data : trim( $data ) );
+			// nested @...: if opening a new part we just closed, remove the previous closing instead of adding opening.
+			if ( AT_START === $type
+				&& count( $this->tokens )
+				&& ( $last = end( $this->tokens ) )
+				&& AT_END === $last[0]
+				&& trim( $data ) === $last[1] ) {
+					array_pop( $this->tokens );
+			} else {
+				$this->tokens[] = array( $type, ( COMMENT === $type || IMPORTANT_COMMENT === $type ) ? $data : trim( $data ) );
+			}
 		}
 	}
 
@@ -521,7 +414,7 @@ class TablePress_CSSTidy {
 		if ( -1 === $line ) {
 			$line = $this->line;
 		}
-		$line = intval( $line );
+		$line = (int) $line;
 		$add = array(
 			'm' => $message,
 			't' => $type,
@@ -605,7 +498,7 @@ class TablePress_CSSTidy {
 		if ( ! is_dir( 'temp' ) ) {
 			$madedir = mkdir( 'temp' );
 			if ( ! $madedir ) {
-				print 'Could not make directory "temp" in ' . dirname( __FILE__ );
+				print 'Could not make directory "temp" in ' . __DIR__;
 				exit;
 			}
 		}
@@ -627,26 +520,22 @@ class TablePress_CSSTidy {
 	 *
 	 * @link http://csstidy.sourceforge.net/templates.php
 	 *
-	 * @param string $content   Either file name (if $from_file is true), content of a template file, "high_compression", "highest_compression", "low_compression", or "default".
+	 * @param string $content   Either file name (if $from_file is true), content of a template file, "default", "low", high", or "highest".
 	 * @param bool   $from_file Optional. Uses $content as filename if true.
 	 */
 	protected function load_template( $content, $from_file = true ) {
-		$predefined_templates = &$this->data['csstidy']['predefined_templates'];
-		if ( in_array( $content, array( 'default', 'low_compression', 'high_compression', 'highest_compression' ), true ) ) {
-			$this->template = $predefined_templates[ $content ];
+		if ( in_array( $content, array( 'default', 'low', 'high', 'highest' ), true ) ) {
+			$this->template = $this->data['csstidy']['predefined_templates'][ $content ];
 			return;
 		}
 
 		if ( $from_file ) {
 			$content = strip_tags( file_get_contents( $content ), '<span>' );
 		}
+
 		// Unify newlines (because the output also only uses \n).
 		$content = str_replace( "\r\n", "\n", $content );
-		$template = explode( '|', $content );
-
-		for ( $i = 0; $i < count( $template ); $i++ ) {
-			$this->template[ $i ] = $template[ $i ];
-		}
+		$this->template = explode( '|', $content );
 	}
 
 	/**
@@ -687,7 +576,6 @@ class TablePress_CSSTidy {
 		$old = @setlocale( LC_ALL, 0 );
 		@setlocale( LC_ALL, 'C' );
 
-		$all_properties = &$this->data['csstidy']['all_properties'];
 		$at_rules = &$this->data['csstidy']['at_rules'];
 		$quoted_string_properties = &$this->data['csstidy']['quoted_string_properties'];
 
@@ -695,6 +583,7 @@ class TablePress_CSSTidy {
 		$this->print->input_css = $string;
 		$string = str_replace( "\r\n", "\n", $string ) . ' ';
 		$cur_comment = '';
+		$cur_at = '';
 
 		for ( $i = 0, $size = strlen( $string ); $i < $size; $i++ ) {
 			if ( "\n" === $string[ $i ] || "\r" === $string[ $i ] ) {
@@ -711,22 +600,22 @@ class TablePress_CSSTidy {
 							$this->from[] = 'at';
 						} elseif ( '{' === $string[ $i ] ) {
 							$this->status = 'is';
-							$this->at = $this->css_new_media_section( $this->at );
+							$this->at = $this->css_new_media_section( $this->at, $cur_at );
 							$this->_add_token( AT_START, $this->at );
 						} elseif ( ',' === $string[ $i ] ) {
-							$this->at = trim( $this->at ) . ',';
+							$cur_at = trim( $cur_at ) . ',';
 						} elseif ( '\\' === $string[ $i ] ) {
-							$this->at .= $this->_unicode( $string, $i );
+							$cur_at .= $this->_unicode( $string, $i );
 						}
 						// Fix for complicated media, i.e @media screen and (-webkit-min-device-pixel-ratio:1.5)
 						// '/' is included for ratios in Opera: (-o-min-device-pixel-ratio: 3/2)
 						elseif ( in_array( $string[ $i ], array( '(', ')', ':', '.', '/' ), true ) ) {
-							$this->at .= $string[ $i ];
+							$cur_at .= $string[ $i ];
 						}
 					} else {
-						$lastpos = strlen( $this->at ) - 1;
-						if ( ! ( ( ctype_space( $this->at[ $lastpos ] ) || $this->is_token( $this->at, $lastpos ) && ',' === $this->at[ $lastpos ] ) && ctype_space( $string[ $i ] ) ) ) {
-							$this->at .= $string[ $i ];
+						$lastpos = strlen( $cur_at ) - 1;
+						if ( ! ( ( ctype_space( $cur_at[ $lastpos ] ) || $this->is_token( $cur_at, $lastpos ) && ',' === $cur_at[ $lastpos ] ) && ctype_space( $string[ $i ] ) ) ) {
+							$cur_at .= $string[ $i ];
 						}
 					}
 					break;
@@ -743,18 +632,19 @@ class TablePress_CSSTidy {
 							foreach ( $at_rules as $name => $type ) {
 								if ( ! strcasecmp( substr( $string, $i + 1, strlen( $name ) ), $name ) ) {
 									if ( 'at' === $type ) {
-										$this->at = '@' . $name;
+										$cur_at = '@' . $name;
 									} else {
 										$this->selector = '@' . $name;
 									}
 									if ( 'atis' === $type ) {
 										$this->next_selector_at = ( $this->next_selector_at ? $this->next_selector_at : ( $this->at ? $this->at : DEFAULT_AT ) );
-										$this->at = $this->css_new_media_section( ' ' );
+										$this->at = $this->css_new_media_section( $this->at, ' ', true );
 										$type = 'is';
 									}
 									$this->status = $type;
 									$i += strlen( $name );
 									$this->invalid_at = false;
+									break;
 								}
 							}
 
@@ -780,20 +670,21 @@ class TablePress_CSSTidy {
 							$this->invalid_at = false;
 							$this->status = 'is';
 							if ( $this->next_selector_at ) {
-								$this->at = $this->css_new_media_section( $this->next_selector_at );
+								$this->at = $this->css_close_media_section( $this->at );
+								$this->at = $this->css_new_media_section( $this->at, $this->next_selector_at );
 								$this->next_selector_at = '';
 							}
 						} elseif ( '{' === $string[ $i ] ) {
 							$this->status = 'ip';
 							if ( '' === $this->at ) {
-								$this->at = $this->css_new_media_section( DEFAULT_AT );
+								$this->at = $this->css_new_media_section( $this->at, DEFAULT_AT );
 							}
 							$this->selector = $this->css_new_selector( $this->at, $this->selector );
 							$this->_add_token( SEL_START, $this->selector );
 							$this->added = false;
 						} elseif ( '}' === $string[ $i ] ) {
 							$this->_add_token( AT_END, $this->at );
-							$this->at = '';
+							$this->at = $this->css_close_media_section( $this->at );
 							$this->selector = '';
 							$this->sel_separate = array();
 						} elseif ( ',' === $string[ $i ] ) {
@@ -835,7 +726,8 @@ class TablePress_CSSTidy {
 							$this->selector = '';
 							$this->property = '';
 							if ( $this->next_selector_at ) {
-								$this->at = $this->css_new_media_section( $this->next_selector_at );
+								$this->at = $this->css_close_media_section( $this->at );
+								$this->at = $this->css_new_media_section( $this->at, $this->next_selector_at );
 								$this->next_selector_at = '';
 							}
 						} elseif ( ';' === $string[ $i ] ) {
@@ -914,7 +806,7 @@ class TablePress_CSSTidy {
 						}
 						if ( ( '}' === $string[ $i ] || ';' === $string[ $i ] || $pn ) && ! empty( $this->selector ) ) {
 							if ( '' === $this->at ) {
-								$this->at = $this->css_new_media_section( DEFAULT_AT );
+								$this->at = $this->css_new_media_section( $this->at, DEFAULT_AT );
 							}
 
 							// Case settings.
@@ -971,7 +863,8 @@ class TablePress_CSSTidy {
 							$this->invalid_at = false;
 							$this->selector = '';
 							if ( $this->next_selector_at ) {
-								$this->at = $this->css_new_media_section( $this->next_selector_at );
+								$this->at = $this->css_close_media_section( $this->at );
+								$this->at = $this->css_new_media_section( $this->at, $this->next_selector_at );
 								$this->next_selector_at = '';
 							}
 						}
@@ -1001,7 +894,7 @@ class TablePress_CSSTidy {
 						$this->str_char[] = ( '(' === $string[ $i ] ) ? ')' : $string[ $i ];
 						$this->from[] = 'instr';
 						$this->quoted_string[] = ( ')' === $_str_char && '(' !== $string[ $i ] && '(' === trim( $_cur_string ) ) ? $_quoted_string : ( '(' !== $string[ $i ] );
-						continue;
+						continue 2;
 					}
 
 					if ( ')' !== $_str_char && ( "\n" === $string[ $i ] || "\r" === $string[ $i ] ) && ! ( '\\' === $string[ $i - 1 ] && ! $this->escaped( $string, $i - 1 ) ) ) {
@@ -1066,7 +959,12 @@ class TablePress_CSSTidy {
 					if ( '*' === $string[ $i ] && '/' === $string[ $i + 1 ] ) {
 						$this->status = array_pop( $this->from );
 						$i++;
-						$this->_add_token( COMMENT, $cur_comment );
+						if ( strlen( $cur_comment ) > 1 && 0 === strncmp( $cur_comment, '!', 1 ) ) {
+							$this->_add_token( IMPORTANT_COMMENT, $cur_comment );
+							$this->css_add_important_comment( $cur_comment );
+						} else {
+							$this->_add_token( COMMENT, $cur_comment );
+						}
 						$cur_comment = '';
 					} else {
 						$cur_comment .= $string[ $i ];
@@ -1156,6 +1054,25 @@ class TablePress_CSSTidy {
 	}
 
 	/**
+	 * Add an important comment to the CSS code (one we want to keep when minifying).
+	 *
+	 * @since 1.10.0
+	 *
+	 * @param string $comment CSS Comment.
+	 */
+	protected function css_add_important_comment( $comment ) {
+		if ( $this->get_cfg( 'preserve_css' ) || '' === trim( $comment ) ) {
+			return;
+		}
+		if ( ! isset( $this->css['!'] ) ) {
+			$this->css['!'] = '';
+		} else {
+			$this->css['!'] .= "\n";
+		}
+		$this->css['!'] .= $comment;
+	}
+
+	/**
 	 * Adds a property with value to the existing CSS code.
 	 *
 	 * @since 1.0.0
@@ -1181,28 +1098,26 @@ class TablePress_CSSTidy {
 	}
 
 	/**
-	 * Start a new media section.
+	 * Check if a current media section is the continuation of the last one.
+	 * If not increase the name of the media section to avoid a merging.
 	 *
-	 * Check if the media is not already known, else rename it with extra spaces to avoid merging.
+	 * @since 1.10.0
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $media Media.
-	 * @return string [return value]
+	 * @param int|string $media Media.
+	 * @return int|string [return value]
 	 */
-	protected function css_new_media_section( $media ) {
-		if ( $this->get_cfg( 'preserve_css' ) ) {
+	protected function css_check_last_media_section_or_inc( $media ) {
+		// Are we starting?
+		if ( empty( $this->css ) || ! is_array( $this->css ) ) {
 			return $media;
 		}
 		// If the last @media is the same as this, keep it.
-		if ( ! $this->css || ! is_array( $this->css ) || empty( $this->css ) ) {
-			return $media;
-		}
 		end( $this->css );
 		$at = key( $this->css );
 		if ( $at === $media ) {
 			return $media;
 		}
+		// Otherwise increase the section in the array.
 		while ( isset( $this->css[ $media ] ) ) {
 			if ( is_numeric( $media ) ) {
 				$media++;
@@ -1211,6 +1126,57 @@ class TablePress_CSSTidy {
 			}
 		}
 		return $media;
+	}
+
+	/**
+	 * Start a new media section.
+	 *
+	 * Check if the media is not already known, else rename it with extra spaces to avoid merging.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $current_media Media.
+	 * @param string $new_media     Media.
+	 * @param bool   $at_root       Optional. Default false.
+	 * @return string [return value]
+	 */
+	protected function css_new_media_section( $current_media, $new_media, $at_root = false ) {
+		if ( $this->get_cfg( 'preserve_css' ) ) {
+			return $new_media;
+		}
+		// If we already are in a media and CSS level is 3, manage nested medias.
+		if ( $current_media
+			&& ! $at_root
+			// numeric $current_media means DEFAULT_AT or inc
+			&& ! is_numeric( $current_media )
+			&& 0 === strncmp( $this->get_cfg( 'css_level' ), 'CSS3', 4 ) ) {
+				$new_media = rtrim( $current_media ) . '{' . rtrim( $new_media );
+		}
+		return $this->css_check_last_media_section_or_inc( $new_media );
+	}
+
+	/**
+	 * Close a media section.
+	 *
+	 * Find the parent media we were in before or the root.
+	 *
+	 * @since 1.10.0
+	 *
+	 * @param string $current_media Current Media.
+	 * @return string [return value]
+	 */
+	protected function css_close_media_section( $current_media ) {
+		if ( $this->get_cfg( 'preserve_css' ) ) {
+			return '';
+		}
+		if ( false !== strpos( $current_media, '{' ) ) {
+			$current_media = explode( '{', $current_media );
+			array_pop( $current_media );
+			$current_media = implode( '{', $current_media );
+			return $current_media;
+		}
+
+		return '';
 	}
 
 	/**
@@ -1236,7 +1202,7 @@ class TablePress_CSSTidy {
 				return $selector;
 			}
 
-			if ( ! $this->css || ! isset( $this->css[ $media ] ) || ! $this->css[ $media ] ) {
+			if ( empty( $this->css ) || ! isset( $this->css[ $media ] ) || ! $this->css[ $media ] ) {
 				return $selector;
 			}
 
@@ -1270,7 +1236,7 @@ class TablePress_CSSTidy {
 		if ( $this->get_cfg( 'preserve_css' ) ) {
 			return $property;
 		}
-		if ( ! $this->css || ! isset( $this->css[ $media ][ $selector ] ) || ! $this->css[ $media ][ $selector ] ) {
+		if ( empty( $this->css ) || ! isset( $this->css[ $media ][ $selector ] ) || ! $this->css[ $media ][ $selector ] ) {
 			return $property;
 		}
 
@@ -1364,7 +1330,9 @@ class TablePress_CSSTidy {
 	 */
 	public function property_is_valid( $property ) {
 		$property = strtolower( $property );
-		if ( in_array( trim( $property ), $this->data['csstidy']['multiple_properties'], true ) ) {
+		if ( 0 === strpos( $property, '--' ) ) {
+			$property = '--custom'; // Replace custom properties with a temporary placeholder that is marked as valid in the list of properties.
+		} elseif ( in_array( trim( $property ), $this->data['csstidy']['multiple_properties'], true ) ) {
 			$property = trim( $property );
 		}
 		$all_properties = &$this->data['csstidy']['all_properties'];

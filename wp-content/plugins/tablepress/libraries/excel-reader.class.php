@@ -131,7 +131,7 @@ class OLERead {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param [type] $data [description]
+	 * @param string $data [description]
 	 * @return [type] [description]
 	 */
 	public function read( $data ) {
@@ -207,19 +207,19 @@ class OLERead {
 
 		// readData(rootStartBlock)
 		$block = $rootStartBlock;
-		$this->entry = $this->__readData( $block );
-		$this->__readPropertySets();
+		$this->entry = $this->_readData( $block );
+		$this->_readPropertySets();
 	}
 
 	/**
-	 * [__readData description]
+	 * [_readData description]
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param [type] $bl [description]
 	 * @return [type] [description]
 	 */
-	protected function __readData( $bl ) {
+	protected function _readData( $bl ) {
 		$block = $bl;
 		$data = '';
 		while ( -2 !== $block ) {
@@ -231,13 +231,13 @@ class OLERead {
 	}
 
 	/**
-	 * [__readPropertySets description]
+	 * [_readPropertySets description]
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return [type] [description]
 	 */
-	protected function __readPropertySets() {
+	protected function _readPropertySets() {
 		$offset = 0;
 		while ( $offset < strlen( $this->entry ) ) {
 			$d = substr( $this->entry, $offset, PROPERTY_STORAGE_BLOCK_SIZE );
@@ -275,7 +275,7 @@ class OLERead {
 	 */
 	public function getWorkBook() {
 		if ( $this->props[ $this->wrkbook ]['size'] < SMALL_BLOCK_THRESHOLD ) {
-			$rootdata = $this->__readData( $this->props[ $this->rootentry ]['startBlock'] );
+			$rootdata = $this->_readData( $this->props[ $this->rootentry ]['startBlock'] );
 			$streamData = '';
 			$block = $this->props[ $this->wrkbook ]['startBlock'];
 			while ( -2 !== $block ) {
@@ -369,7 +369,7 @@ define( 'SPREADSHEET_EXCEL_READER_TYPE_DEFCOLWIDTH', 0x55 );
 define( 'SPREADSHEET_EXCEL_READER_TYPE_STANDARDWIDTH', 0x99 );
 define( 'SPREADSHEET_EXCEL_READER_DEF_NUM_FORMAT', '%s' );
 
-/*
+/**
 * Main Class
 */
 class Spreadsheet_Excel_Reader {
@@ -1063,11 +1063,11 @@ class Spreadsheet_Excel_Reader {
 	 *
 	 * @param [type] $row   [description]
 	 * @param [type] $col   [description]
-	 * @param int    $sheet Optional. [description]
-	 * @param [type] $prop  [description]
+	 * @param int    $sheet [description]
+	 * @param string $prop  [description]
 	 * @return [type] [description]
 	 */
-	public function fontProperty( $row, $col, $sheet = 0, $prop ) {
+	public function fontProperty( $row, $col, $sheet, $prop ) {
 		$font = $this->fontRecord( $row, $col, $sheet );
 		if ( null !== $font ) {
 			return $font[ $prop ];
@@ -1671,8 +1671,7 @@ class Spreadsheet_Excel_Reader {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param [type] $data [description]
-	 * @return [type] [description]
+	 * @param string $data [description]
 	 */
 	public function read( $data ) {
 		$res = $this->_ole->read( $data );
@@ -2322,8 +2321,8 @@ class Spreadsheet_Excel_Reader {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param [type] $ts Optional. [description]
-	 * @return [type] [description]
+	 * @param int $ts Optional. Timestamp. Defaults to current Unix timestamp.
+	 * @return array [description]
 	 */
 	protected function gmgetdate( $ts = null ) {
 		$k = array( 'seconds', 'minutes', 'hours', 'mday', 'wday', 'mon', 'year', 'yday', 'weekday', 'month', 0 );
@@ -2331,7 +2330,7 @@ class Spreadsheet_Excel_Reader {
 	}
 
 	/**
-	 * Get the details for a particular cell
+	 * Gets the details for a particular cell.
 	 *
 	 * @since 1.0.0
 	 *
@@ -2368,8 +2367,8 @@ class Spreadsheet_Excel_Reader {
 			$totalseconds = floor( SPREADSHEET_EXCEL_READER_MSINADAY * $fractionalDay );
 			$secs = $totalseconds % 60;
 			$totalseconds -= $secs;
-			$hours = floor( $totalseconds / ( 60 * 60 ) );
-			$mins = floor( $totalseconds / 60 ) % 60;
+			$hours = (int) floor( $totalseconds / ( 60 * 60 ) );
+			$mins = (int) floor( $totalseconds / 60 ) % 60;
 			$string = date( $format, mktime( $hours, $mins, $secs, $dateinfo['mon'], $dateinfo['mday'], $dateinfo['year'] ) );
 		} elseif ( 'number' === $type ) {
 			$rectype = 'number';
@@ -2435,7 +2434,7 @@ class Spreadsheet_Excel_Reader {
 	 * @param [type] $row    [description]
 	 * @param [type] $col    [description]
 	 * @param [type] $string [description]
-	 * @param [type] $info   Optional. [description]
+	 * @param array  $info   Optional. [description]
 	 * @return [type] [description]
 	 */
 	protected function addcell( $row, $col, $string, $info = null ) {

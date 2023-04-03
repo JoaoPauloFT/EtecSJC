@@ -10,7 +10,11 @@ jQuery(document).ready(function($) {
 	$('.dropdown-submenu > a[href]').click(function(e){
 		if ( $(window).width() <= 991 ) {
 			e.preventDefault(); event.stopPropagation();
+			$('.dropdown-submenu', $(this).parents('.dropdown-menu') ).removeClass('open');
 			$(this).parent().toggleClass('open');
+
+			$('.dropdown-menu', $(this).parents('.dropdown-menu') ).hide();
+			$(this).siblings('.dropdown-menu').show();
 		}
 	});
 
@@ -39,6 +43,58 @@ jQuery(document).ready(function($) {
 				}
 			}
 		});
+
+
+		/* Adjust the width of the navbar to match the parent container */
+		adjustNavbarWidth();
+		$(window).resize(function(){adjustNavbarWidth();});
+		$('body > .container').resize(function(){adjustNavbarWidth();});
+	}
+
+	function adjustNavbarWidth(){
+		if ( $('.boxed-wrapper').length > 0 ) {
+			parentWidth = $('.boxed-wrapper').outerWidth();
+			$('.boxed-wrapper .navbar').width(parentWidth);
+		}
+	}
+
+
+	/* Live search */
+	if ( ! grapheneJS.disableLiveSearch ) {
+		$('.live-search-input input').autocomplete({
+		    serviceUrl				: grapheneJS.siteurl + '/?autocomplete=post',
+		    deferRequestBy			: 200,
+		    showNoSuggestionNotice	: true,
+		    noSuggestionNotice 		: grapheneJS.txtNoResult,
+		    onSearchStart: function (query) {
+		    	$(this).siblings('.live-search-icon').show();
+		    },
+		    onSearchComplete: function (query, suggestions) {
+		    	$(this).siblings('.live-search-icon').hide();
+		    },
+		    onSelect: function (suggestion) {
+		        window.location.href = suggestion.data;
+		    }
+		});
+
+		/* bbPress */
+		$('input[name="bbp_search"]').wrap('<div class="bbpress-live-search"></div>');
+		$('input[name="bbp_search"]').after('<i class="fa fa-spin fa-circle-o-notch live-search-icon" style="display:none"></i>');
+		$('.bbpress-live-search input').autocomplete({
+		    serviceUrl				: grapheneJS.siteurl + '/?autocomplete=bbpress',
+		    deferRequestBy			: 200,
+		    showNoSuggestionNotice	: true,
+		    noSuggestionNotice 		: grapheneJS.txtNoResult,
+		    onSearchStart: function (query) {
+		    	$(this).siblings('.live-search-icon').show();
+		    },
+		    onSearchComplete: function (query, suggestions) {
+		    	$(this).siblings('.live-search-icon').hide();
+		    },
+		    onSelect: function (suggestion) {
+		        window.location.href = suggestion.data;
+		    }
+		});
 	}
 	
 
@@ -64,7 +120,7 @@ jQuery(document).ready(function($) {
 		}
 
 		/* Fix Bootstrap Carousel not pausing on hover */
-		$(document).on( 'mouseenter hover', '.carousel', function() {
+		$(document).on( 'mouseenter', '.carousel', function() {
 			$(this).carousel( 'pause' );
 		});
 		$(document).on( 'mouseleave', '.carousel', function() {
@@ -126,19 +182,33 @@ jQuery(document).ready(function($) {
 			},
 			// debug		: true
 		};
-		
+
+		/* Manually parse the path so that Infinite Scroll will still work even on offset page */
+		currentPage = parseInt( $(infScrollOptions.navSelector+' .current').html() );
+		infScrollOptions.state = { currPage: currentPage };
+
+		nextURI = $(infScrollOptions.nextSelector).attr('href');
+		nextIndex = (currentPage+1).toString();
+		suffix = nextURI.slice(-(nextURI.length - nextURI.indexOf(nextIndex)-nextIndex.length));
+		pathURI = nextURI.replace(nextIndex+suffix,'');
+		infScrollOptions.pathParse = function(path,nextPage){
+			path = [pathURI,suffix];
+			return path;
+		};
+
+		/* Modify the path for reverse Infinite Scroll direction */
 		if (  $(this).data('direction') == 'reverse' ) {
 			infScrollOptions.direction = $(this).data('direction');
 			
-			var currentPage = parseInt( $(infScrollOptions.navSelector+' .current').html() );
+			currentPage = parseInt( $(infScrollOptions.navSelector+' .current').html() );
 			infScrollOptions.state = { currPage: currentPage };
 			
 			if ($(infScrollOptions.nextSelector).length > 0) {
-				var nextURI = $(infScrollOptions.nextSelector).attr('href');
-				var nextIndex = (currentPage-1).toString();
+				nextURI = $(infScrollOptions.nextSelector).attr('href');
+				nextIndex = (currentPage-1).toString();
 				
-				var suffix = nextURI.slice(-(nextURI.length - nextURI.indexOf(nextIndex)-nextIndex.length));
-				var pathURI = nextURI.replace(nextIndex,'').replace(suffix,'');
+				suffix = nextURI.slice(-(nextURI.length - nextURI.indexOf(nextIndex)-nextIndex.length));
+				pathURI = nextURI.replace(nextIndex,'').replace(suffix,'');
 	
 				infScrollOptions.pathParse = function(path,nextPage){
 					path = [pathURI,suffix];
@@ -147,7 +217,7 @@ jQuery(document).ready(function($) {
 			}
 		}
 		
-		$(infScroll).infinitescroll(infScrollOptions, function(newElems){
+		$(infScroll).infinitescroll(infScrollOptions, function(newElems, response, path){
 			infScrollBtnObj.data('remaining-posts', infScrollBtnObj.data('remainingPosts') - parseInt(newElems.length));
 			
 			if ( infScrollBtnObj.data('method') == 'click' ) infScrollBtnObj.html(grapheneGetInfScrollBtnLbl(infScrollBtnObj.data('remainingPosts')));
@@ -167,6 +237,8 @@ jQuery(document).ready(function($) {
 				infScrollBtnObj.html(grapheneJS.infScrollFinishedText).addClass('disabled').removeAttr('href');
 				$(infScroll).infinitescroll('destroy');
 			}
+
+			$(infScroll).trigger( 'append.infinitescroll', [newElems, response, path] );
 		});
 		$($(this).data('navSelector')).hide();
 		
@@ -193,6 +265,18 @@ jQuery(document).ready(function($) {
             backToTop = function () {
                 var scrollTop = $(window).scrollTop();
                 var pageHeight = $(document).height() - $(window).height();
+
+                if ( $('.grecaptcha-badge').length > 0 ) {
+					if ( ! $('#back-to-top').hasClass('position-adjusted') ) {
+						recaptchaBadgePos = $('.grecaptcha-badge').position();
+						if ( ( $(window).height() - recaptchaBadgePos.top ) < 75 ) {
+							if ( ( $(window).width() - recaptchaBadgePos.left ) < 75 ) {
+								$('#back-to-top').css('bottom', ( $(window).height() - recaptchaBadgePos.top + 20 ) + 'px' );
+								$('#back-to-top').addClass('position-adjusted');
+							}
+						}
+					}
+				}
 
                	if ( scrollTop == pageHeight ) {
                		$(backtotop).removeClass('show');
@@ -234,6 +318,37 @@ jQuery(document).ready(function($) {
 			});
 		});
 	}
+
+
+	/**
+	 * Remember user preference to hide auto column switch notification
+	 */
+	$('#graphene-auto-column-switch-alert .close').click(function(){
+		data = { action: 'graphene-hide-auto-column-switch-alert' };
+		$.post(grapheneJS.ajaxurl, data);
+	});
+
+
+	/**
+	 * Ensure pricing table price heights are the same for all packages in the same row
+	 */
+	if ( $('.pricing-table .price-package').length > 1 && $(window).width() >= 768 ) {
+		$('.panel-row-style:has(.price-package)').each(function(){
+
+			var priceDetailsMaxHeight = 0;
+			$('.price-package .details', this).each(function(){
+				if ( $(this).outerHeight() > priceDetailsMaxHeight ) priceDetailsMaxHeight = $(this).outerHeight();
+			});
+			$('.price-package .details', this).css('height', priceDetailsMaxHeight + 'px');
+
+			var pricePackageMaxHeight = 0;
+			$('.price-package', this).each(function(){
+				if ( $(this).outerHeight() > pricePackageMaxHeight ) pricePackageMaxHeight = $(this).outerHeight();
+			});
+			$('.price-package', this).css('height', pricePackageMaxHeight + 'px');
+		});
+	}
+
 });
 
 

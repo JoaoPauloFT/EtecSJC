@@ -13,11 +13,12 @@ function graphene_inf_posts_nav_defaults( $defaults ){
 			'nav-selector'	=> '.pagination',
 			'next-selector'	=> '.pagination .next',
 			'item-selector'	=> '.entries-wrapper .item-wrap',
-			'total-posts'	=> $wp_query->found_posts,
+			'total-posts'	=> $wp_query->found_posts - ( $defaults['current'] - 1 ) * $wp_query->query_vars['posts_per_page'],
 			'posts-per-page'=> $wp_query->query_vars['posts_per_page'],
 			'method'		=> $graphene_settings['inf_scroll_method']
 		)
 	) );
+	// disect_it( $defaults );
 	
 	return $defaults;
 }
@@ -66,10 +67,10 @@ function graphene_inf_posts_stack_nav_args( $args, $posts ){
 	global $graphene_settings;
 	$args = array_merge( $args, array(
 		'infinite-scroll'	=> array(
-			'container'		=> '.posts-list .row',
+			'container'		=> '.posts-list .entries-wrapper',
 			'nav-selector'	=> '.posts-list .pagination',
 			'next-selector'	=> '.posts-list .pagination .next',
-			'item-selector'	=> '.posts-list .row .item-wrap',
+			'item-selector'	=> '.posts-list .item-wrap',
 			'total-posts'	=> $posts->found_posts,
 			'posts-per-page'=> $posts->query_vars['posts_per_page'],
 			'method'		=> $graphene_settings['inf_scroll_method']

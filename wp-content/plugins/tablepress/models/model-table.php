@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed!' );
 
 /**
  * Table Model class
+ *
  * @package TablePress
  * @subpackage Models
  * @author Tobias Bäthge
@@ -67,114 +68,6 @@ class TablePress_Table_Model extends TablePress_Model {
 	protected $tables;
 
 	/**
-	 * Mappings for old to new parameter names for DataTables.
-	 * DataTables 1.9 used Hungarian notation, while DataTables 1.10+ uses camelCase notation.
-	 *
-	 * As this array is used in strtr(), it's pre-sorted for descending string length of the array keys.
-	 *
-	 * @since 1.5.0
-	 * @var array
-	 * @link https://www.datatables.net/upgrade/1.10-convert
-	 */
-	protected $datatables_parameter_mappings = array(
-		'fnStateSaveParams' => 'stateSaveParams',
-		'fnStateLoadParams' => 'stateLoadParams',
-		'fnPreDrawCallback' => 'preDrawCallback',
-		'fnHeaderCallback'  => 'headerCallback',
-		'fnFooterCallback'  => 'footerCallback',
-		'sSortDescending'   => 'sortDescending',
-		'sPaginationType'   => 'pagingType',
-		'sLoadingRecords'   => 'loadingRecords',
-		'sDefaultContent'   => 'defaultContent',
-		'sContentPadding'   => 'contentPadding',
-		'iCookieDuration'   => 'stateDuration',
-		'bScrollCollapse'   => 'scrollCollapse',
-		'asStripeClasses'   => 'stripeClasses',
-		'sSortAscending'    => 'sortAscending',
-		'sInfoThousands'    => 'thousands',
-		'iDisplayLength'    => 'pageLength',
-		'fnServerParams'    => 'ajax',
-		'fnInitComplete'    => 'initComplete',
-		'fnInfoCallback'    => 'infoCallback',
-		'fnFormatNumber'    => 'formatNumber',
-		'fnDrawCallback'    => 'drawCallback',
-		'aaSortingFixed'    => 'orderFixed',
-		'sSortDataType'     => 'orderDataType',
-		'sServerMethod'     => 'ajax',
-		'sScrollXInner'     => 'scrollXInner',
-		'sInfoFiltered'     => 'infoFiltered',
-		'sAjaxDataProp'     => 'dataSrc',
-		'iDisplayStart'     => 'displayStart',
-		'iDeferLoading'     => 'deferLoading',
-		'fnStateLoaded'     => 'stateLoaded',
-		'fnRowCallback'     => 'rowCallback',
-		'fnCreatedCell'     => 'createdCell',
-		'bSortCellsTop'     => 'orderCellsTop',
-		'bLengthChange'     => 'lengthChange',
-		'sZeroRecords'      => 'zeroRecords',
-		'sInfoPostFix'      => 'infoPostFix',
-		'fnServerData'      => 'ajax',
-		'fnCreatedRow'      => 'createdRow',
-		'bSortClasses'      => 'orderClasses',
-		'bDeferRender'      => 'deferRender',
-		'aoSearchCols'      => 'searchCols',
-		'aoColumnDefs'      => 'columnDefs',
-		'sProcessing'       => 'processing',
-		'sLengthMenu'       => 'lengthMenu',
-		'sEmptyTable'       => 'emptyTable',
-		'sAjaxSource'       => 'ajax',
-		'fnStateSave'       => 'stateSaveCallback',
-		'fnStateLoad'       => 'stateLoadCallback',
-		'bServerSide'       => 'serverSide',
-		'bSearchable'       => 'searchable',
-		'bProcessing'       => 'processing',
-		'aLengthMenu'       => 'lengthMenu',
-		'sInfoEmpty'        => 'infoEmpty',
-		'bStateSave'        => 'stateSave',
-		'bAutoWidth'        => 'autoWidth',
-		'className'         => 'className', // Replace "className" with itself, to avoid that the replacement for "sName" breaks it.
-		'sPrevious'         => 'previous',
-		'sCellType'         => 'cellType',
-		'oPaginate'         => 'paginate',
-		'oLanguage'         => 'language',
-		'iTabIndex'         => 'tabIndex',
-		'iDataSort'         => 'orderData',
-		'bSortable'         => 'orderable',
-		'bRetrieve'         => 'retrieve',
-		'bPaginate'         => 'paging',
-		'bJQueryUI'         => 'jQueryUI',
-		'asSorting'         => 'orderSequence',
-		'aoColumns'         => 'columns',
-		'aaSorting'         => 'order',
-		'aDataSort'         => 'orderData',
-		'sScrollY'          => 'scrollY',
-		'sScrollX'          => 'scrollX',
-		'bVisible'          => 'visible',
-		'bDestroy'          => 'destroy',
-		'aTargets'          => 'targets',
-		'sSearch'           => 'search',
-		'oSearch'           => 'search',
-		'mRender'           => 'render',
-		'bFilter'           => 'searching',
-		'sWidth'            => 'width',
-		'sTitle'            => 'title',
-		'sFirst'            => 'first',
-		'sClass'            => 'className',
-		'aaData'            => 'data',
-		'sType'             => 'type',
-		'sNext'             => 'next',
-		'sName'             => 'name',
-		'sLast'             => 'last',
-		'sInfo'             => 'info',
-		'oAria'             => 'aria',
-		'mData'             => 'data',
-		'bSort'             => 'ordering',
-		'bInfo'             => 'info',
-		'sUrl'              => 'url',
-		'sDom'              => 'dom',
-	);
-
-	/**
 	 * Init the Table model by instantiating a Post model and loading the list of tables option.
 	 *
 	 * @since 1.0.0
@@ -222,6 +115,9 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * @return array Post.
 	 */
 	protected function _table_to_post( array $table, $post_id ) {
+		// Run filters on content in each cell and other fields.
+		$table = $this->filter_content( $table );
+
 		// Sanitize each cell, table name, and table description, if the user is not allowed to work with unfiltered HTML.
 		if ( ! current_user_can( 'unfiltered_html' ) ) {
 			$table = $this->sanitize( $table );
@@ -235,7 +131,6 @@ class TablePress_Table_Model extends TablePress_Model {
 		$post = array(
 			'ID'             => $post_id,
 			'post_title'     => $table['name'],
-			// 'post_author' => $table['author'],
 			'post_excerpt'   => $table['description'],
 			'post_content'   => wp_json_encode( $table['data'], TABLEPRESS_JSON_OPTIONS ),
 			'post_mime_type' => 'application/json',
@@ -272,18 +167,9 @@ class TablePress_Table_Model extends TablePress_Model {
 
 		// Check if JSON could be decoded.
 		if ( is_null( $table['data'] ) ) {
-			// Set a single cell as the default.
-			$table['data'] = array( array( "The internal data of table {$table_id} is corrupted." ) );
-			// Mark table as corrupted.
+			$table['data'] = array( array( "The internal data of table {$table_id} is corrupted." ) ); // Set a single cell as the cell content.
 			$table['is_corrupted'] = true;
-
-			// If possible, try to find out what error prevented the JSON from being decoded.
-			$table['json_error'] = 'The error could not be determined.';
-			$json_error_msg = json_last_error_msg();
-			if ( false !== $json_error_msg ) {
-				$table['json_error'] = $json_error_msg;
-			}
-
+			$table['json_error'] = json_last_error_msg();
 			$table['description'] = "[ERROR] TABLE IS CORRUPTED (JSON error: {$table['json_error']})!  DO NOT EDIT THIS TABLE NOW!\nInstead, please see https://tablepress.org/faq/corrupted-tables/ for instructions.\n-\n{$table['description']}";
 		} else {
 			// Specifically cast to an array again.
@@ -358,7 +244,7 @@ class TablePress_Table_Model extends TablePress_Model {
 
 		if ( $run_filter ) {
 			/**
-			 * Filter all table IDs that are loaded.
+			 * Filters all table IDs that are loaded.
 			 *
 			 * @since 1.4.0
 			 *
@@ -380,15 +266,54 @@ class TablePress_Table_Model extends TablePress_Model {
 	 */
 	public function sanitize( array $table ) {
 		// Sanitize the table name and description.
-		$fields_to_sanitize = array( 'name', 'description' );
-		foreach ( $fields_to_sanitize as $field ) {
+		$fields = array( 'name', 'description' );
+		foreach ( $fields as $field ) {
 			$table[ $field ] = wp_kses_post( $table[ $field ] );
 		}
 
 		// Sanitize each cell.
 		foreach ( $table['data'] as $row_idx => $row ) {
 			foreach ( $row as $column_idx => $cell_content ) {
-				$table['data'][ $row_idx ][ $column_idx ] = wp_kses_post( $cell_content ); // equals wp_filter_post_kses(), but without the unncessary slashes handling
+				$table['data'][ $row_idx ][ $column_idx ] = wp_kses_post( $cell_content ); // Equals wp_filter_post_kses(), but without the unncessary slashes handling.
+			}
+		}
+
+		return $table;
+	}
+
+	/**
+	 * Filter/modify the content of table cells and other fields, e.g. for security hardening.
+	 *
+	 * This is similar to the `sanitize()` method, but executed for all users.
+	 * In 1.10.0, adding `rel="noopener noreferrer"` to all HTML link elements like `<a target=` was added. See https://core.trac.wordpress.org/ticket/43187.
+	 * Since 1.13.0, and on WP 5.6, only `rel="noopener"` is added. See https://core.trac.wordpress.org/ticket/49558.
+	 *
+	 * @since 1.10.0
+	 *
+	 * @param array $table Table.
+	 * @return array Filtered/modified table.
+	 */
+	public function filter_content( array $table ) {
+		/**
+		 * Filters whether the contents of table cells and fields should be filtered/modified.
+		 *
+		 * @since 1.10.0
+		 *
+		 * @param bool $filter Whether to filter the content of table cells and other fields. Default true.
+		 */
+		if ( ! apply_filters( 'tablepress_filter_table_cell_content', true ) ) {
+			return $table;
+		}
+
+		// Filter the table name and description.
+		$fields = array( 'name', 'description' );
+		foreach ( $fields as $field ) {
+			$table[ $field ] = wp_targeted_link_rel( $table[ $field ] );
+		}
+
+		foreach ( $table['data'] as $row_idx => $row ) {
+			foreach ( $row as $column_idx => $cell_content ) {
+				$table['data'][ $row_idx ][ $column_idx ] = wp_targeted_link_rel( $cell_content );
 			}
 		}
 
@@ -463,7 +388,7 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * @return string|WP_Error WP_Error on error, string table ID of the new table on success.
 	 */
 	public function add( array $table, $copy_or_add = 'add' ) {
-		$post_id = -1; // to insert table
+		$post_id = -1; // To insert table.
 		$post = $this->_table_to_post( $table, $post_id );
 		$new_post_id = $this->model_post->insert( $post );
 		if ( is_wp_error( $new_post_id ) ) {
@@ -640,7 +565,7 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param bool $single_value Optional. Whether to return just the number of tables from the list, or also count in the database.
-	 * @return bool int|array Number of Tables (if $single_value), or array of Numbers from list/DB (if ! $single_value).
+	 * @return int|array Number of Tables (if $single_value), or array of Numbers from list/DB (if ! $single_value).
 	 */
 	public function count_tables( $single_value = true ) {
 		$count_list = count( $this->tables->get( 'table_post' ) );
@@ -682,7 +607,7 @@ class TablePress_Table_Model extends TablePress_Model {
 	 */
 	public function _flush_caching_plugins_caches() {
 		/**
-		 * Filter whether the caches of common caching plugins shall be flushed.
+		 * Filters whether the caches of common caching plugins shall be flushed.
 		 *
 		 * @since 1.0.0
 		 *
@@ -692,23 +617,74 @@ class TablePress_Table_Model extends TablePress_Model {
 			return;
 		}
 
-		// W3 Total Cache
-		if ( function_exists( 'w3tc_pgcache_flush' ) ) {
-			w3tc_pgcache_flush();
+		// Common cache flush callback.
+		$cache_flush_callbacks = array(
+			array( 'Breeze_PurgeCache', 'breeze_cache_flush' ), // Breeze.
+			array( 'comet_cache', 'clear' ), // Comet Cache.
+			'pantheon_wp_clear_edge_all', // Pantheon.
+			'sg_cachepress_purge_cache', // SG Optimizer.
+			array( 'Swift_Performance_Cache', 'clear_all_cache' ), // Swift Performance.
+			'w3tc_pgcache_flush', // W3 Total Cache.
+			array( 'WpeCommon', 'purge_memcached' ), // WP Engine.
+			array( 'WpeCommon', 'clear_maxcdn_cache' ), // WP Engine.
+			array( 'WpeCommon', 'purge_varnish_cache' ), // WP Engine.
+			'wpfc_clear_all_cache', // WP Fastest Cache.
+			'rocket_clean_domain', // WP Rocket.
+			'wp_cache_clear_cache', // WP Super Cache.
+			array( 'zencache', 'clear' ), // Zen Cache.
+		);
+		foreach ( $cache_flush_callbacks as $cache_flush_callback ) {
+			if ( is_callable( $cache_flush_callback ) ) {
+				call_user_func( $cache_flush_callback );
+			}
 		}
-		// WP Super Cache
-		if ( function_exists( 'wp_cache_clear_cache' ) ) {
-			wp_cache_clear_cache();
+
+		// Common cache flush hooks.
+		$cache_flush_hooks = array(
+			'ce_clear_cache', // Cache Enabler.
+			'cachify_flush_cache', // Cachify.
+			'autoptimize_action_cachepurged', // Hyper Cache.
+		);
+		foreach ( $cache_flush_hooks as $cache_flush_hook ) {
+			do_action( $cache_flush_hook );
 		}
-		// Cachify
-		do_action( 'cachify_flush_cache' );
-		// Quick Cache
-		if ( isset( $GLOBALS['quick_cache'] ) && method_exists( $GLOBALS['quick_cache'], 'clear_cache' ) ) {
-			$GLOBALS['quick_cache']->clear_cache();
+
+		// Kinsta.
+		if ( isset( $GLOBALS['kinsta_cache'] ) && ! empty( $GLOBALS['kinsta_cache']->kinsta_cache_purge ) && is_callable( array( $GLOBALS['kinsta_cache']->kinsta_cache_purge, 'purge_complete_caches' ) ) ) {
+			$GLOBALS['kinsta_cache']->kinsta_cache_purge->purge_complete_caches();
 		}
-		// WP Fastest Cache
-		if ( isset( $GLOBALS['wp_fastest_cache'] ) && method_exists( $GLOBALS['wp_fastest_cache'], 'deleteCache' ) ) {
+		// LiteSpeed Cache.
+		if ( is_callable( array( 'LiteSpeed_Cache_Tags', 'add_purge_tag' ) ) ) {
+			LiteSpeed_Cache_Tags::add_purge_tag( '*' );
+		}
+		// Pagely.
+		if ( class_exists( 'PagelyCachePurge' ) ) {
+			$_pagely = new PagelyCachePurge();
+			if ( is_callable( array( $_pagely, 'purgeAll' ) ) ) {
+				$_pagely->purgeAll();
+			}
+		}
+		// Pressidum.
+		if ( is_callable( array( 'Ninukis_Plugin', 'get_instance' ) ) ) {
+			$_pressidum = Ninukis_Plugin::get_instance();
+			if ( is_callable( array( $_pressidum, 'purgeAllCaches' ) ) ) {
+				$_pressidum->purgeAllCaches();
+			}
+		}
+		// Savvii.
+		if ( defined( '\Savvii\CacheFlusherPlugin::NAME_DOMAINFLUSH_NOW' ) ) {
+			$_savvii = new \Savvii\CacheFlusherPlugin();
+			if ( is_callable( array( $_savvii, 'domainflush' ) ) ) {
+				$_savvii->domainflush();
+			}
+		}
+		// WP Fastest Cache.
+		if ( isset( $GLOBALS['wp_fastest_cache'] ) && is_callable( $GLOBALS['wp_fastest_cache'], 'deleteCache' ) ) {
 			$GLOBALS['wp_fastest_cache']->deleteCache();
+		}
+		// WP-Optimize.
+		if ( function_exists( 'WP_Optimize' ) ) {
+			WP_Optimize()->get_page_cache()->purge();
 		}
 	}
 
@@ -718,15 +694,14 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param string $table_id Table ID.
-	 * @return int|bool Post ID on success, false on error.
+	 * @return int|false Post ID on success, false on error.
 	 */
 	protected function _get_post_id( $table_id ) {
 		$table_post = $this->tables->get( 'table_post' );
-		if ( isset( $table_post[ $table_id ] ) ) {
-			return $table_post[ $table_id ];
-		} else {
+		if ( ! isset( $table_post[ $table_id ] ) ) {
 			return false;
 		}
+		return $table_post[ $table_id ];
 	}
 
 	/**
@@ -735,7 +710,7 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * @since 1.0.0
 	 *
 	 * @param string $table_id Table ID.
-	 * @param int $post_id Post ID.
+	 * @param int    $post_id Post ID.
 	 */
 	protected function _update_post_id( $table_id, $post_id ) {
 		$tables = $this->tables->get();
@@ -808,10 +783,11 @@ class TablePress_Table_Model extends TablePress_Model {
 		$tables = $this->tables->get();
 		// Need to check new ID candidate in a loop, because a higher ID might already be in use, if a table ID was changed manually.
 		do {
-			$tables['last_id'] ++;
-		} while ( $this->table_exists( $tables['last_id'] ) );
+			++$tables['last_id'];
+			$last_id_string = (string) $tables['last_id'];
+		} while ( $this->table_exists( $last_id_string ) );
 		$this->tables->update( $tables );
-		return (string) $tables['last_id'];
+		return $last_id_string;
 	}
 
 	/**
@@ -829,9 +805,8 @@ class TablePress_Table_Model extends TablePress_Model {
 			'id'            => false,
 			'name'          => '',
 			'description'   => '',
-			'data'          => array( array( '' ) ), // one empty cell
-			// 'created' => current_time( 'mysql' ),
-			'last_modified' => current_time( 'mysql' ),
+			'data'          => array( array( '' ) ), // One empty cell.
+			'last_modified' => wp_date( 'Y-m-d H:i:s' ),
 			'author'        => get_current_user_id(),
 			'options'       => array(
 				'last_editor'                 => get_current_user_id(),
@@ -844,7 +819,7 @@ class TablePress_Table_Model extends TablePress_Model {
 				'print_description'           => false,
 				'print_description_position'  => 'below',
 				'extra_css_classes'           => '',
-				// DataTables JavaScript library
+				// DataTables JavaScript library.
 				'use_datatables'              => true,
 				'datatables_sort'             => true,
 				'datatables_filter'           => true,
@@ -856,12 +831,12 @@ class TablePress_Table_Model extends TablePress_Model {
 				'datatables_custom_commands'  => '',
 			),
 			'visibility'    => array(
-				'rows'    => array( 1 ), // one visbile row
-				'columns' => array( 1 ), // one visible column
+				'rows'    => array( 1 ), // One visbile row.
+				'columns' => array( 1 ), // One visible column.
 			),
 		);
 		/**
-		 * Filter the default template/structure of an empty table.
+		 * Filters the default template/structure of an empty table.
 		 *
 		 * @since 1.0.0
 		 *
@@ -880,29 +855,22 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * @param array $table                     Table to merge into.
 	 * @param array $new_table                 Table to merge.
 	 * @param bool  $table_size_check          Optional. Whether to check the number of rows and columns (e.g. not necessary for added or copied tables).
-	 * @param bool  $extended_visibility_check Optional. Whether to check the counts of hidden rows and columns (only possible for Admin_AJAX controller as of now).
 	 * @return array|WP_Error Merged table on success, WP_Error on error.
 	 */
-	public function prepare_table( array $table, array $new_table, $table_size_check = true, $extended_visibility_check = false ) {
+	public function prepare_table( array $table, array $new_table, $table_size_check = true ) {
 		// Table ID must be the same (if there was an ID already).
-		if ( false !== $table['id'] ) {
-			if ( $table['id'] !== $new_table['id'] ) {
-				return new WP_Error( 'table_prepare_no_id_match', '', $new_table['id'] );
-			}
+		if ( false !== $table['id'] && $table['id'] !== $new_table['id'] ) {
+			return new WP_Error( 'table_prepare_no_id_match', '', $new_table['id'] );
 		}
 
 		// Name, description, and data array need to exist, data must not be empty, the others could be ''.
-		if ( ! isset( $new_table['name'] )
-		|| ! isset( $new_table['description'] )
-		|| empty( $new_table['data'] )
-		|| empty( $new_table['data'][0] ) ) {
+		if ( ! isset( $new_table['name'], $new_table['description'] )
+		|| empty( $new_table['data'] ) || empty( $new_table['data'][0] ) ) {
 			return new WP_Error( 'table_prepare_name_description_or_data_not_set' );
 		}
 
 		// Visibility needs to exist.
-		if ( ! isset( $new_table['visibility'] )
-		|| ! isset( $new_table['visibility']['rows'] )
-		|| ! isset( $new_table['visibility']['columns'] ) ) {
+		if ( ! isset( $new_table['visibility']['rows'], $new_table['visibility']['columns'] ) ) {
 			return new WP_Error( 'table_prepare_visibility_not_set' );
 		}
 		$new_table['visibility']['rows'] = array_map( 'intval', $new_table['visibility']['rows'] );
@@ -910,14 +878,12 @@ class TablePress_Table_Model extends TablePress_Model {
 
 		// Check dimensions of table data array (not done for newly added, copied, or imported tables).
 		if ( $table_size_check ) {
-			if ( empty( $new_table['number'] )
-			|| ! isset( $new_table['number']['rows'] )
-			|| ! isset( $new_table['number']['columns'] ) ) {
+			if ( ! isset( $new_table['number']['rows'], $new_table['number']['columns'] ) ) {
 				return new WP_Error( 'table_prepare_size_check_numbers_not_set' );
 			}
 			// Table data needs to be ok, and have the correct number of rows and columns.
-			$new_table['number']['rows'] = intval( $new_table['number']['rows'] );
-			$new_table['number']['columns'] = intval( $new_table['number']['columns'] );
+			$new_table['number']['rows'] = (int) $new_table['number']['rows'];
+			$new_table['number']['columns'] = (int) $new_table['number']['columns'];
 			if ( 0 === $new_table['number']['rows']
 			|| 0 === $new_table['number']['columns']
 			|| count( $new_table['data'] ) !== $new_table['number']['rows']
@@ -929,31 +895,6 @@ class TablePress_Table_Model extends TablePress_Model {
 			|| count( $new_table['visibility']['columns'] ) !== $new_table['number']['columns'] ) {
 				return new WP_Error( 'table_prepare_size_check_visibility_doesnt_match' );
 			}
-
-			if ( $extended_visibility_check ) { // only for Admin_AJAX controller
-				if ( ! isset( $new_table['number']['hidden_rows'] )
-				|| ! isset( $new_table['number']['hidden_columns'] ) ) {
-					return new WP_Error( 'table_prepare_extended_visibility_check_numbers_not_set' );
-				}
-				$new_table['number']['hidden_rows'] = intval( $new_table['number']['hidden_rows'] );
-				$new_table['number']['hidden_columns'] = intval( $new_table['number']['hidden_columns'] );
-				// Count hidden and visible rows.
-				$num_visible_rows = count( array_keys( $new_table['visibility']['rows'], 1 ) );
-				$num_hidden_rows = count( array_keys( $new_table['visibility']['rows'], 0 ) );
-				// Check number of hidden and visible rows.
-				if ( $new_table['number']['hidden_rows'] !== $num_hidden_rows
-				|| ( $new_table['number']['rows'] - $new_table['number']['hidden_rows'] ) !== $num_visible_rows ) {
-					return new WP_Error( 'table_prepare_extended_visibility_check_rows_dont_match' );
-				}
-				// Count hidden and visible columns.
-				$num_visible_columns = count( array_keys( $new_table['visibility']['columns'], 1 ) );
-				$num_hidden_columns = count( array_keys( $new_table['visibility']['columns'], 0 ) );
-				// Check number of hidden and visible columns.
-				if ( $new_table['number']['hidden_columns'] !== $num_hidden_columns
-				|| ( $new_table['number']['columns'] - $new_table['number']['hidden_columns'] ) !== $num_visible_columns ) {
-					return new WP_Error( 'table_prepare_extended_visibility_check_columns_dont_match' );
-				}
-			}
 		}
 
 		// All checks were successful, replace original values with new ones.
@@ -963,23 +904,26 @@ class TablePress_Table_Model extends TablePress_Model {
 		$table['name'] = $new_table['name'];
 		$table['description'] = $new_table['description'];
 		$table['data'] = $new_table['data'];
-		// $table['author'] = get_current_user_id(); // We don't want this, as it would override the original author.
-		// $table['created'] = current_time( 'mysql' ); // We don't want this, as it would override the original datetime.
-		$table['last_modified'] = current_time( 'mysql' );
-		$table['options']['last_editor'] = get_current_user_id();
+		// Make sure that cells are stored as strings.
+		array_walk_recursive(
+			$table['data'],
+			static function( &$cell_content, $col_idx ) {
+				$cell_content = (string) $cell_content;
+			}
+		);
 		// Table Options.
-		if ( isset( $new_table['options'] ) ) { // is for example not set for newly added tables
+		if ( isset( $new_table['options'] ) ) { // Options are for example not set for newly added tables.
 			// Specials check for certain options.
 			if ( isset( $new_table['options']['extra_css_classes'] ) ) {
 				$new_table['options']['extra_css_classes'] = explode( ' ', $new_table['options']['extra_css_classes'] );
-				$new_table['options']['extra_css_classes'] = array_map( 'sanitize_html_class', $new_table['options']['extra_css_classes'] );
+				$new_table['options']['extra_css_classes'] = array_map( array( 'TablePress', 'sanitize_css_class' ), $new_table['options']['extra_css_classes'] );
 				$new_table['options']['extra_css_classes'] = array_unique( $new_table['options']['extra_css_classes'] );
 				$new_table['options']['extra_css_classes'] = trim( implode( ' ', $new_table['options']['extra_css_classes'] ) );
 			}
 			if ( isset( $new_table['options']['datatables_paginate_entries'] ) ) {
-				$new_table['options']['datatables_paginate_entries'] = intval( $new_table['options']['datatables_paginate_entries'] );
+				$new_table['options']['datatables_paginate_entries'] = (int) $new_table['options']['datatables_paginate_entries'];
 				if ( $new_table['options']['datatables_paginate_entries'] < 1 ) {
-					$new_table['options']['datatables_paginate_entries'] = 10; // default value
+					$new_table['options']['datatables_paginate_entries'] = 10; // Default value.
 				}
 			}
 			// Merge new options.
@@ -991,10 +935,11 @@ class TablePress_Table_Model extends TablePress_Model {
 		// Table Visibility.
 		$table['visibility']['rows'] = $new_table['visibility']['rows'];
 		$table['visibility']['columns'] = $new_table['visibility']['columns'];
-		// Convert DataTables 1.9 parameters (Hungarian notation) to DataTables 1.10 parameters (camelCase notation).
-		if ( '' !== $table['options']['datatables_custom_commands'] ) {
-			$table['options']['datatables_custom_commands'] = strtr( $table['options']['datatables_custom_commands'], $this->datatables_parameter_mappings );
-		}
+
+		// $table['author'] = get_current_user_id(); // We don't want this, as it would override the original author.
+		// $table['created'] = wp_date( 'Y-m-d H:i:s' ); // We don't want this, as it would override the original datetime.
+		$table['last_modified'] = wp_date( 'Y-m-d H:i:s' );
+		$table['options']['last_editor'] = get_current_user_id();
 
 		return $table;
 	}
@@ -1093,8 +1038,11 @@ class TablePress_Table_Model extends TablePress_Model {
 	 * for all tables.
 	 *
 	 * @since 1.0.0
+	 * @since 2.0.0 Add optional $remove_old_options parameter.
+	 *
+	 * @param bool $remove_old_options Optional. Whether old table options should be removed from the database. Default true.
 	 */
-	public function merge_table_options_defaults() {
+	public function merge_table_options_defaults( $remove_old_options = true ) {
 		$table_post = $this->tables->get( 'table_post' );
 		if ( empty( $table_post ) ) {
 			return;
@@ -1109,8 +1057,10 @@ class TablePress_Table_Model extends TablePress_Model {
 		// Go through all tables (this loop now uses the WP cache).
 		foreach ( $table_post as $table_id => $post_id ) {
 			$table_options = $this->_get_table_options( $post_id );
-			// Remove old (i.e. no longer existing) Table Options.
-			$table_options = array_intersect_key( $table_options, $default_table['options'] );
+			if ( $remove_old_options ) {
+				// Remove old (i.e. no longer existing) Table Options.
+				$table_options = array_intersect_key( $table_options, $default_table['options'] );
+			}
 			// Merge current into new Table Options.
 			$table_options = array_merge( $default_table['options'], $table_options );
 			$this->_update_table_options( $post_id, $table_options );
@@ -1118,109 +1068,9 @@ class TablePress_Table_Model extends TablePress_Model {
 	}
 
 	/**
-	 * Merge changes made for TablePress 0.6-beta:
-	 * Table Name/Table Description.
-	 *
-	 * @since 0.6-beta
-	 */
-	public function merge_table_options_tp06() {
-		$table_post = $this->tables->get( 'table_post' );
-		if ( empty( $table_post ) ) {
-			return;
-		}
-
-		// Prime the meta cache with the table options of all tables.
-		update_meta_cache( 'post', array_values( $table_post ) );
-
-		// Go through all tables.
-		foreach ( $table_post as $table_id => $post_id ) {
-			$table_options = $this->_get_table_options( $post_id );
-
-			// Move "Print Name" to new format.
-			$print_name = in_array( $table_options['print_name'], array( 'above', 'below' ), true );
-			if ( $print_name ) {
-				$table_options['print_name_position'] = $table_options['print_name'];
-			}
-			$table_options['print_name'] = $print_name;
-			// Move "Print Description" to new format.
-			$print_description = in_array( $table_options['print_description'], array( 'above', 'below' ), true );
-			if ( $print_description ) {
-				$table_options['print_description_position'] = $table_options['print_description'];
-			}
-			$table_options['print_description'] = $print_description;
-
-			$this->_update_table_options( $post_id, $table_options );
-		}
-	}
-
-	/**
-	 * Merge changes made for TablePress 0.8-beta:
-	 * Conversion of parameter "datatables_scrollX" to "datatables_scrollx".
-	 * Fixes a bug that affects about the first 600 downloaders of 0.8-beta.
-	 *
-	 * @since 0.8-beta
-	 */
-	public function merge_table_options_tp08() {
-		$table_post = $this->tables->get( 'table_post' );
-		if ( empty( $table_post ) ) {
-			return;
-		}
-
-		// Prime the meta cache with the table options of all tables.
-		update_meta_cache( 'post', array_values( $table_post ) );
-
-		foreach ( $table_post as $table_id => $post_id ) {
-			$table_options = $this->_get_table_options( $post_id );
-
-			// Convert parameter "datatables_scrollX" to "datatables_scrollx".
-			if ( isset( $table_options['datatables_scrollX'] ) && ! isset( $table_options['datatables_scrollx'] ) ) {
-				$table_options['datatables_scrollx'] = $table_options['datatables_scrollX'];
-			}
-
-			$this->_update_table_options( $post_id, $table_options );
-		}
-	}
-
-	/**
-	 * Convert old parameter names to new ones in DataTables "Custom Commands".
-	 * DataTables 1.9 used Hungarian notation, while DataTables 1.10+ (used since TablePress 1.5) uses camelCase notation.
-	 *
-	 * @since 1.5.0
-	 */
-	public function convert_datatables_parameter_names_tp15() {
-		$table_post = $this->tables->get( 'table_post' );
-		if ( empty( $table_post ) ) {
-			return;
-		}
-
-		// Prime the meta cache with the table options of all tables.
-		update_meta_cache( 'post', array_values( $table_post ) );
-
-		foreach ( $table_post as $table_id => $post_id ) {
-			$table_options = $this->_get_table_options( $post_id );
-
-			// Nothing to do if there are no "Custom Commands".
-			if ( empty( $table_options['datatables_custom_commands'] ) ) {
-				continue;
-			}
-			// Run search/replace.
-			$old_custom_commands = $table_options['datatables_custom_commands'];
-			$table_options['datatables_custom_commands'] = strtr( $table_options['datatables_custom_commands'], $this->datatables_parameter_mappings );
-			// No need to save (which runs a DB query) if nothing was replaced in the "Custom Commands".
-			if ( $old_custom_commands === $table_options['datatables_custom_commands'] ) {
-				continue;
-			}
-
-			$this->_update_table_options( $post_id, $table_options );
-		}
-	}
-
-	/**
 	 * Invalidate all table output caches, e.g. after a plugin update.
 	 *
-	 * For TablePress 0.9-RC and onwards.
-	 *
-	 * @since 0.9-RC
+	 * @since 1.0.0
 	 */
 	public function invalidate_table_output_caches() {
 		$table_post = $this->tables->get( 'table_post' );
@@ -1230,30 +1080,6 @@ class TablePress_Table_Model extends TablePress_Model {
 
 		foreach ( $table_post as $table_id => $post_id ) {
 			$this->invalidate_table_output_cache( $table_id );
-		}
-	}
-
-	/**
-	 * Invalidate all table output caches, e.g. after a plugin update.
-	 * For TablePress pre-0.9-RC updates.
-	 *
-	 * @since 0.9-RC
-	 */
-	public function invalidate_table_output_caches_tp09() {
-		$table_post = $this->tables->get( 'table_post' );
-		if ( empty( $table_post ) ) {
-			return;
-		}
-
-		foreach ( $table_post as $table_id => $post_id ) {
-			$caches_list_transient_name = 'tablepress_c_' . md5( $table_id );
-			$caches_list = get_transient( $caches_list_transient_name );
-			if ( is_array( $caches_list ) ) {
-				foreach ( $caches_list as $cache_transient_name => $dummy_value ) {
-					delete_transient( $cache_transient_name );
-				}
-			}
-			delete_transient( $caches_list_transient_name );
 		}
 	}
 
@@ -1275,12 +1101,12 @@ class TablePress_Table_Model extends TablePress_Model {
 	 *
 	 * @since 1.5.0
 	 *
-	 * @param int   $post_id          Post ID of the imported post.
-	 * @param int   $original_post_ID Original post ID that the post had on the site where it was exported from.
-	 * @param array $postdata         Post data that was imported into the database.
-	 * @param array $post             Original post data as it was exported.
+	 * @param int|WP_Error $post_id          Post ID of the imported post on success. 0 or WP_Error on failure.
+	 * @param int          $original_post_id Original post ID that the post had on the site where it was exported from.
+	 * @param array        $postdata         Post data that was imported into the database.
+	 * @param array        $post             Original post data as it was exported.
 	 */
-	public function add_table_id_on_wp_import( $post_id, $original_post_ID, array $postdata, array $post ) {
+	public function add_table_id_on_wp_import( $post_id, $original_post_id, array $postdata, array $post ) {
 		// Bail if the post could not be imported or if the post is not a TablePress table.
 		if ( is_wp_error( $post_id ) || $this->model_post->get_post_type() !== $postdata['post_type'] ) {
 			return;

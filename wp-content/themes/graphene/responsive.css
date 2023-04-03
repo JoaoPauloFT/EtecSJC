@@ -7,16 +7,16 @@
 	    padding-left: 15px;
 	    padding-right: 15px;
 	}
-	#top-bar {
+	.top-bar {
 		padding: 0;
 	}
 	.top-bar-items .logo {
 		display: none;
 	}
-	#top-bar .social-profiles {
+	.top-bar .social-profiles {
 		margin: 5px 0;
 	}
-	#top-bar #top_search {
+	.top-bar .top-search-form {
 		height: 0px;
 		float: none;
 		padding: 0 15px;
@@ -28,11 +28,19 @@
 		overflow: hidden;
 		background: rgba(0,0,0,0.2);
 	}
-	#top-bar #top_search.in {
+	.top-bar .top-search-form.in {
 		height: 48px;
 	}
-	#top_search .searchform {
+	.top-search-form .searchform {
 		margin: 7px 0;
+	}
+	.top-bar .text-alignleft,
+	.top-bar .text-alignright {
+		text-align: center;
+	}
+	.top-bar .text,
+	.top-bar-menu {
+		margin: 0.5em 0;
 	}
 	.search-toggle {
 		margin: 0 -15px 0 0;
@@ -50,11 +58,10 @@
 	}
 	.header_title {
 		margin: 0;
-		padding: 0 15px;
+		padding: 15px;
 		text-align: left;
 		font-size: 1em;
 		letter-spacing: normal;
-		line-height: 50px;
 	}
 	.header_title,
 	.header_title a,
@@ -71,7 +78,7 @@
 	.header_desc {
 		display: none;
 	}
-	.navbar #top_search {
+	.navbar .top-search-form {
 		margin: 0;
 	}
 	.navbar-toggle {
@@ -82,6 +89,8 @@
 	}
 	.navbar-inverse .navbar-toggle {
 		border-color: #333;
+		background-color: #444;
+		background-color: rgba(0,0,0,0.4);
 	}
 	.navbar-inverse .navbar-toggle .icon-bar {
 		background-color: #fff;
@@ -98,6 +107,10 @@
 	.navbar-nav,
 	.navbar-nav ul {
 		padding-bottom: 5px;
+	}
+	.boxed-wrapper .navbar-fixed-top {
+		left: 0;
+		right: 0;
 	}
 	.navbar-fixed-top {
 		margin-left: 0;
@@ -149,7 +162,8 @@
 		box-shadow: none;
 	}
 	.entry-content .excerpt-thumb {
-		margin: 15px -15px;
+		margin: 0 -15px 1.5em;
+		display: block;
 	}
 	.gallery-columns-2 .gallery-item,
 	.gallery-columns-3 .gallery-item,
@@ -192,6 +206,9 @@
 	}
 	.gallery dt {
 		margin-top: 0;
+	}
+	.entry .featured-image .caption {
+		padding: .5em 1em;
 	}
 	.entry-author {
 		text-align: center;
@@ -298,6 +315,16 @@
 	.panel-grid .mentions-bar-logo {
 		padding: 0;
 	}
+	.pricing-table {
+		flex-wrap: wrap;
+	}
+	.pricing-table .price-package {
+		width: 100%;
+		margin-bottom: 40px;
+	}
+	.pricing-table .price-package.has-highlight {
+		margin-top: 45px;
+	}
 }
 
 /* Small devices up to tablets */
@@ -307,6 +334,9 @@
 		width: auto;
 		box-shadow: none;
 		border: none;
+	}
+	.bottom-slider .carousel {
+		margin-top: 50px;
 	}
 	#header .carousel {
 		margin: 0;
@@ -403,6 +433,10 @@
 	}
 	.footer-widget-col-5 .sidebar-wrap {
 	    width: 20% !important;
+	}
+	.navbar-fixed-top {
+		left: 15px;
+		right: 15px;
 	}
 	.admin-bar .navbar-fixed-top {
 		top: 32px;

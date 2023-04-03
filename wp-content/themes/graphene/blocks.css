@@ -1,6 +1,9 @@
 [class^="wp-block-"] {
     margin-bottom: 1.5em;
 }
+.widget_block [class^="wp-block-"] {
+	margin-bottom: 0;
+}
 .wp-block-separator {
 	margin: 40px 45%;
 }
@@ -73,8 +76,7 @@ p cite {
 }
 .entry-content .wp-block-gallery {
 	padding: 0;
-	margin-left: -8px;
-	margin-right: -8px;
+    max-width: 100%;
 }
 .wp-block-gallery .blocks-gallery-image img, 
 .wp-block-gallery .blocks-gallery-item img {
@@ -137,6 +139,10 @@ p cite {
 	background: #4F2D69;
 	color: #ffffff;
 }
+.wp-block-button.is-style-outline .wp-block-button__link {
+	background: transparent;
+	border: 1px solid #4F2D69;
+}
 .wp-block-verse {
     color: #191e23;
     white-space: nowrap;
@@ -190,6 +196,11 @@ table tr,
 .wp-block-cover-image {
 	display: flex !important;
 }
+.entry-content .blocks-gallery-grid {
+    padding: 0;
+    max-width: 100%;
+}
+
 
 @media only screen and (min-width: 768px) {
 	.alignfull {

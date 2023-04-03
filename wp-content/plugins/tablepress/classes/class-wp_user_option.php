@@ -18,6 +18,7 @@ TablePress::load_file( 'class-wp_option.php', 'classes' );
 
 /**
  * TablePress WP User Option Wrapper class
+ *
  * @package TablePress
  * @subpackage Classes
  * @author Tobias Bäthge
@@ -65,7 +66,7 @@ class TablePress_WP_User_Option extends TablePress_WP_Option {
 
 		// WP expects a slashed value.
 		$new_value = wp_slash( $new_value );
-		return update_user_option( get_current_user_id(), $option_name, $new_value, false );
+		return (bool) update_user_option( get_current_user_id(), $option_name, $new_value, false );
 	}
 
 	/**

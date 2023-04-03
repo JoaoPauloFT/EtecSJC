@@ -29,8 +29,9 @@ $graphene_defaults = apply_filters( 'graphene_defaults', array(
 	
 	/* Slider options */
 	'slider_type' 				=> 'latest_posts', 	// latest_posts | random | posts_pages | categories
+	'slider_post_types'			=> array( 'post' ),
 	'slider_specific_posts' 	=> '',
-    'slider_specific_categories'=> '',
+    'slider_specific_categories'=> array(),
 	'slider_exclude_categories'	=> false,
 	'slider_random_category_posts' => false,
 	'slider_exclude_posts'		=> '',
@@ -101,6 +102,7 @@ $graphene_defaults = apply_filters( 'graphene_defaults', array(
 	/* Adsense Options */
 	'show_adsense' 				=> false,
 	'adsense_code' 				=> '',
+	'adsense_max_count'			=> 3,
 	'adsense_show_frontpage'    => false,
 	
 	/* Google Analytics options */
@@ -161,6 +163,7 @@ $graphene_defaults = apply_filters( 'graphene_defaults', array(
 	'hide_post_commentcount' 	=> false,
 	'hide_post_cat' 			=> false,
 	'hide_post_tags' 			=> false,
+	'hide_post_featured_image'	=> true,
 	'hide_author_bio'			=> false,
 	'hide_post_nav'				=> false,
 	'post_nav_in_term'			=> false,
@@ -200,6 +203,8 @@ $graphene_defaults = apply_filters( 'graphene_defaults', array(
 							),
 	
 	'top_bar_bg' 				=> '#4c315a',
+	'top_bar_fg' 				=> '#aaaaaa',
+	'top_bar_link' 				=> '#cccccc',
 	
 	'menu_primary_bg' 				=> '#2F2733',
 	'menu_primary_item' 			=> '#ffffff',
@@ -288,6 +293,7 @@ $graphene_defaults = apply_filters( 'graphene_defaults', array(
 	/* Advanced options */
 	'widget_hooks' 				=> array(),
 	'head_tags'					=> '',
+	'host_scripts_locally'		=> false,
 
 	/* Utilities */
 	'reset_settings'			=> false,

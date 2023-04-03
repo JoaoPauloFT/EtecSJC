@@ -4,6 +4,176 @@ https://www.graphene-theme.com/
 
 CHANGELOG
 
+Version 2.9 [19-03-2022]
+	* Changed: Use absolute directory path when getting image dimensions for local images
+	* Fixed: PHP8 deprecation notice in customizer.php
+	* Fixed: PHP notice in Block-based Widgets Editor
+	* Fixed: Inconsistent widget title tag and styling when using Block-based Widgets Editor
+	* Fixed: Several styling issues with blocks in Block Editor
+	* Fixed: Search results contain double featured images when archive pages are set to display full content
+	* Fixed: Child pages appear in WooCommerce archive pages
+
+Version 2.8.6 [06-09-2021]
+	* Fixed: Error when publishing changes in Customizer
+	
+Version 2.8.5 [22-07-2021]
+	* Fixed: Error importing theme options file if settings file contains valid HTML
+	* Fixed: Incorrect thumbnail image size in related posts
+	* Fixed: Unable to update custom menu in certain environment
+
+Version 2.8.4 [10-02-2021]
+	* Added: Featured image display to Pages
+	* Added: Support for WP paragraph block font size and line height
+	* Fixed: PHP notices/warnings in inc/functions.php
+	* Fixed: JS error in certain plugins due to deferred-loading of jQuery Migrate
+	* Fixed: Post thumbnails not appearing in blog page when excerpts are displayed
+	* Fixed: Content styling not applied in WordPress editor
+	* Changed: Minimum featured image width for display in singular pages lowered to 75% of content area width
+
+Version 2.8.3 [27-01-2021]
+	* Added: Granular CSS classes for author byline
+	* Fixed: Text colour in search box when placed in the navigation bar
+	* Fixed: Structured Data markup warnings for AMP pages
+	* Fixed: PHP warnings in loop.php
+	* Fixed: Inconsistent behaviour related to excerpts and features images in posts listing
+	* Fixed: PHP notices/warnings related to getimagesize() for certain server configurations
+
+Version 2.8.2 [11-10-2020]
+	* Added: Top bar foreground and links colour options
+	* Added: Move back-to-top button if there is a Recaptcha badge on page
+	* Fixed: Styling conflict with Memphis Documents Library plugin
+	* Fixed: Restored header HTML structure when using default top bar arrangement
+	* Fixed: Missing comments gravatar and reply link
+	* Fixed: Bootstrap conflict with other plugins in WP Admin
+	* Fixed: 404 error when attempting to load Bootstrap source map in browser's developer console
+	* Updated: Replaced use of "Wanna" with the more formal "Would you like to"
+
+Version 2.8.1 [07-09-2020]
+	* Added: Automatic post content padding when wrapper and content background colours are different
+	* Added: Automatic widget padding when wrapper and widget background colours are the same
+	* Fixed: Custom fields in menu items are duplicated
+	* Fixed: Regular comments are counted as pings
+	* Fixed: Text overflow in homepage panes
+	* Fixed: Duplicate graphene_top_bar action hook
+	* Fixed: Graphene top bar link colour may override third party widgets CSS
+	* Fixed: Compatibility issue with Yoast SEO plugin
+
+Version 2.8 [15-08-2020]
+	* Added: Option to show featured image at the top of posts
+	* Various performance optimisations
+	* Fixed: Comments does not appear in front end with WordPress 5.5
+	* Fixed: Random image selected if no header image is defined in settings
+	* Fixed: Locally-loaded Google Fonts do not have "font-display: swap" applied
+	* Fixed: Double menu icon field
+	* Removed: htmlshiv.js and respond.js
+	* Removed: Favicon option since this is now managed by WordPress
+	* Removed: .map files
+
+Version 2.7.6 [15-05-2020]
+	* Fixed: Unable to turn off Yoast SEO breadcrumbs
+	* Fixed: Alignment issues in Customizer when using RTL languages
+
+Version 2.7.5 [28-04-2020]
+	* Added: Native support for Yoast SEO breadcrumbs
+	* Fixed: Option to display excerpt in front page not applied if option to show full content in archive pages is enabled
+	* Fixed: Block editor width no longer follows the theme's content width
+	* Fixed: Child pages listing thumbnail has low resolution on mobile devices
+	* Fixed: Empty header image tag sometimes shown for certain configurations
+
+Version 2.7.4 [12-04-2020]
+	* Fixed: The option "Show full content in archive pages" is not working
+	* Fixed: Styling for Read More button when using Block Editor
+	* Fixed: Warning message if allow_url_fopen is disabled in the server
+
+Version 2.7.3 [24-2-2020]
+	* Added: Google Fonts are now loaded asynchronously using Webfont Loader
+	* Added: Optimized images
+	* Added: Parse shortcode and formatting in taxonomy description
+	* Updated: Expand container width range to 400px - 2000px
+	* Fixed: No H1 tag on the front page
+	* Fixed: A few styling issues on RTL sites
+	* Fixed: Header image may have missing alt, width, and height attributes
+	* Fixed: JS error may occur after switching from Graphene Plus to Graphene
+	* Fixed: Navbar width stay fixed when adjusting container width in Customizer
+	* Fixed: RTL CSS not automatically loaded when using a child theme
+
+Version 2.7.2 [24-2-2020]
+	* Added: Responsive embed in block editor
+	* Added: Ensure text are visible before webfonts are loaded
+	* Fixed: Background colour for homepage panes
+	* Fixed: Images in gallery block overflows the content area in Microsoft Edge
+	* Changed: Site title and description no longer use heading elements
+
+Version 2.7.1 [14-11-2019]
+	* Fixed: Error when checking for theme updates in certain multisite configurations
+	* Fixed: Ads appear in front page when using Static Front Page, when it should be disabled
+	* Fixed: PHP warnings when creating new posts in WordPress 5.3
+
+Version 2.7 [10-10-2019]
+	* Updated: Bootstrap 3.4.1
+	* Fixed: Homepage panes image not linked to post when Featured Image is set
+	* Fixed: Read More button in home page panes may not link to post due to conflict with certain plugins
+	* Fixed: Infinite Scroll does not work on paginated URLs
+	* Fixed: Long content occasionally not wrapping in post content
+	* Fixed: Error importing theme options in non-multisite installs due to different returned mime type
+	
+Version 2.6.5 [27-8-2019]
+	* Fixed: Custom Google Fonts not loaded if not hosting the fonts locally
+
+Version 2.6.4 [23-8-2019]
+	* Added: Option to host Google Fonts locally
+	* Fixed: Description text for custom social profile icon ignored when the custom profile is first added
+	* Fixed: HTML tags and continue reading button appearing in links shared on Facebook
+	* Fixed: Auto layout switch when using wide or full-width blocks can sometimes be triggered on the blog listing page
+	* Fixed: Error importing theme options due to WP recognizing the import file as text/html
+	* Fixed: Division by zero error in loop.php
+
+Version 2.6.3 [9-5-2019]
+	* Added: append.infinitescroll event 
+	* Added: wp_body_open() function call
+	* Fixed: Compatibility issue with Elementor
+	* Fixed: Error importing theme options due to WP recognizing the import file as text/html
+	* Fixed: "autocomplete is not a function" script error
+	* Fixed: Search results count sometimes show incorrect value when formatted
+	* Fixed: PHP warnings related to custom header image
+
+Version 2.6.2 [22-3-2019]
+	* Fixed: Multi-level menu not opening when using hover and on tablet devices
+	* Fixed: Custom social profile icon not working when using custom icon URL
+	* Fixed: PHP warnings when customizing social profiles
+
+Version 2.6.1
+	* Added: Load theme-bundled language files whenever available instead of WordPress-supplied language files
+	* Added: determine_locale() function compat (WP 5.0)
+	* Updated: Added Web Text Tool plugin into list of SEO plugins providing Open Graph tags
+	* Updated: Single content page navigation links now clickable within a larger area
+	* Fixed: Positioning of fixed header menu when using boxed layout
+	* Fixed: Some plugins are still loading duplicate Bootstrap script causing feature conflicts
+	* Fixed: Entry thumbnail display on mobile devices
+	* Fixed: PHP warnings related to slider stack, header image, menu classes
+	* Fixed: Double H1 tags on the front page when using Static Front Page
+	* Removed: the_remaining_content() function compat (WP 3.6)
+
+Version 2.6
+	* Added: Option to allow custom post types in slider
+	* Added: Option to specify maximum number of ads to display per page
+	* Added: Switch to single-column layout if stretched content is detected in block editor
+	* Fixed: Minor styling issue with fixed menu on mobile devices
+	* Fixed: Empty <img> tag being added if header image is hidden
+	* Fixed: Styling issue with tag descriptions
+	* Fixed: Empty space when embedding links to other WordPress sites
+	* Fixed: Block editor width does not reflect actual content width
+	* Fixed: Graphene settings export file sometimes contain garbled data in some configurations
+	* Fixed: PHP warning in /inc/functions.php
+	* Fixed: PHP warning in /wp-includes/post-template.php
+	* Fixed: graphene_post_meta and graphene_post_footer hooks not run if there is no entry meta to display
+
+Version 2.5.3
+	* Added: Link to individual comments
+	* Fixed: Navbar sizing and margin when using fixed navbar with certain container styles
+	* Fixed: PHP notice related to social profiles feature
+	* Fixed: PHP warnings related to slider and AMP share
+
 Version 2.5.2
 	* Updated: Removed all instances of hentry since we are no longer using hatom markup, to avoid Google Rich Snippet error
 	* Fixed: Error in Rich Snippet markup if the same images are used

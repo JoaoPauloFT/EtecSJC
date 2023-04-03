@@ -1,0 +1,480 @@
+0000.002 (0) Opened log file at time: Mon, 03 Apr 2023 13:03:31 +0000 on http://localhost/EtecSJC
+0000.075 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.15.5 WP: 4.9.8 PHP: 7.4.29 (apache2handler, Windows NT LUQUINHAS 10.0 build 19044 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/7.4.29 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 31.9M | 34M) multisite: N openssl: OpenSSL 1.1.1l  24 Aug 2021 mcrypt: N LANG:  ZipArchive::addFile: Y
+0000.295 (0) Free space on disk containing Updraft's temporary directory: 184506.1 MB
+0001.903 (0) Tasks: Backup files: 1 (schedule: weekly) Backup DB:  (schedule: weekly)
+0001.972 (0) Processed schedules. Combining jobs from identical schedules. Tasks now: Backup files: 1 Backup DB: 1
+0002.295 (0) Requesting semaphore lock (fd) (apparently via scheduler: last_scheduled_action_called_at=1543034782, seconds_ago=137492231)
+0002.995 (0) Set semaphore last lock (fd) time to 2023-04-03 13:03:34
+0003.184 (0) Semaphore lock (fd) complete
+0003.903 (0) Backup run: resumption=0, nonce=92a6abe03a6c, begun at=1680527011 (4s ago), job type=backup
+0004.710 (0) Scheduling a resumption (1) after 300 seconds (1680527316) in case this run gets aborted
+0005.181 (0) Checking if we have a zip executable available
+0005.367 (0) Creation of backups of directories: beginning
+0005.533 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0008.147 (0) Total entities for the zip file: 323 directories, 1917 files (0 skipped as non-modified), 35.5 MB
+0008.246 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 2.0 seconds have passed since the last write (0.2 MB, 21 (21) files added so far); re-opening (prior size: 0 KB)
+0009.018 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 100 files added (on-disk size: 124.7 KB)
+0009.263 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 200 files added (on-disk size: 124.7 KB)
+0009.475 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 300 files added (on-disk size: 124.7 KB)
+0009.647 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 400 files added (on-disk size: 124.7 KB)
+0009.925 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 500 files added (on-disk size: 124.7 KB)
+0010.261 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 500 files added on this batch (11.4 MB, 1917 files batched, 501 (522) added so far); re-opening (prior size: 124.7 KB)
+0021.533 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 600 files added (on-disk size: 8688.7 KB)
+0021.742 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 700 files added (on-disk size: 8688.7 KB)
+0021.987 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 800 files added (on-disk size: 8688.7 KB)
+0022.355 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 900 files added (on-disk size: 8688.7 KB)
+0022.550 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1000 files added (on-disk size: 8688.7 KB)
+0022.609 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 500 files added on this batch (20 MB, 1917 files batched, 501 (1023) added so far); re-opening (prior size: 8688.7 KB)
+0036.653 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1100 files added (on-disk size: 14344.7 KB)
+0036.838 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1200 files added (on-disk size: 14344.7 KB)
+0036.950 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1300 files added (on-disk size: 14344.7 KB)
+0037.057 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1400 files added (on-disk size: 14344.7 KB)
+0037.181 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1500 files added (on-disk size: 14344.7 KB)
+0037.353 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 500 files added on this batch (1.8 MB, 1917 files batched, 501 (1524) added so far); re-opening (prior size: 14344.7 KB)
+0039.754 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1600 files added (on-disk size: 15047.7 KB)
+0040.038 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1700 files added (on-disk size: 15047.7 KB)
+0040.234 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1800 files added (on-disk size: 15047.7 KB)
+0040.508 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip.tmp: 1900 files added (on-disk size: 15047.7 KB)
+0044.079 (0) Created plugins zip (0) - 15707.9 KB in 38.5 s (407.9 KB/s) (sha1: 2f3d8272d50f7dc7493c4dc59ecab6029813ac3e, sha256: db69dc39051c2651d7595a4dc0c92343055812759a9d3b0c7770965411d4d6e2)
+0044.240 (0) Beginning creation of dump of themes (split every: 400 MB)
+0045.235 (0) Total entities for the zip file: 35 directories, 313 files (0 skipped as non-modified), 9.5 MB
+0045.316 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0045.425 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0045.530 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0052.829 (0) Created themes zip (0) - 4432.6 KB in 8.3 s (536.9 KB/s) (sha1: d21b8b1e5a35cacf1d2bce13c8f3be9ea218e26a, sha256: 7c4a441d5ee8444aa02d8e740dad6514a2943fc06bb9a523356339543a1baae7)
+0052.959 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots
+0053.026 (0) Looking for candidates to backup in: C:\xampp\htdocs\EtecSJC/wp-content/uploads
+0053.096 (0) finding files: 2018: adding to list (1)
+0053.165 (0) finding files: 2023: adding to list (2)
+0053.226 (0) finding files: font-organizer: adding to list (3)
+0053.265 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0053.513 (0) Total entities for the zip file: 7 directories, 232 files (0 skipped as non-modified), 30.4 MB
+0053.754 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip.tmp: 100 files added (on-disk size: 0 KB)
+0053.935 (0) Zip: backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip.tmp: 200 files added (on-disk size: 0 KB)
+0054.161 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 25 MB added on this batch (25 MB, 232 files batched, 211 (211) added so far); re-opening (prior size: 0 KB)
+0063.444 (0) A useful amount of data was added after this amount of zip processing: 10.2 s (normalised: 10.2 s, rate: 2513.9 KB/s)
+0068.241 (0) Created uploads zip (0) - 31190.2 KB in 14.9 s (2088.2 KB/s) (sha1: 89d97e464367df6113240620929caf11e1336437, sha256: c4e1aa7e28e179766585ea933ff9b2150a51582d7bd678a27b7fd6539308a6c0)
+0068.366 (0) Beginning backup of other directories found in the content directory (index: 0)
+0068.406 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0068.441 (0) Looking for candidates to backup in: C:\xampp\htdocs\EtecSJC/wp-content
+0068.481 (0) finding files: index.php: adding to list (1)
+0068.516 (0) finding files: languages: adding to list (2)
+0068.588 (0) finding files: plugins: skipping: this is the plugins directory
+0068.650 (0) finding files: themes: skipping: this is the themes directory
+0068.725 (0) finding files: updraft: skipping: this is the updraft directory
+0068.756 (0) finding files: uploads: skipping: this is the uploads directory
+0068.884 (0) Total entities for the zip file: 3 directories, 15 files (0 skipped as non-modified), 2 MB
+0069.810 (0) Created others zip (0) - 582.6 KB in 1 s (592.7 KB/s) (sha1: 3b85d45da35e1eeb09c073b3c6778bcee61c2619, sha256: bdba1f365f4f7d2afe9cbac49416844257ee9e63537b4461ea18ab5dc1881001)
+0070.023 (0) Saving backup status to database (elements: 8)
+0070.142 (0) Beginning creation of database dump (WordPress DB)
+0070.559 (0) Table wp_options: Total expected rows (approximate): 235
+0070.794 (0) Table wp_options: Total rows added: 231 in 0.11 seconds
+0070.918 (0) Table wp_options: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_options.table.gz - 10.9 KB)
+0071.086 (0) Table wp_users: Total expected rows (approximate): 0
+0071.145 (0) Table wp_users: Total rows added: 1 in 0.02 seconds
+0071.211 (0) Table wp_users: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_users.table.gz - 0.6 KB)
+0071.377 (0) Table wp_usermeta: Total expected rows (approximate): 21
+0071.582 (0) Table wp_usermeta: Total rows added: 21 in 0.09 seconds
+0071.966 (0) Table wp_usermeta: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_usermeta.table.gz - 1 KB)
+0072.337 (0) Table wp_commentmeta: Total expected rows (approximate): 0
+0072.516 (0) Table wp_commentmeta: Total rows added: 0 in 0.07 seconds
+0072.676 (0) Table wp_commentmeta: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_commentmeta.table.gz - 0.4 KB)
+0072.985 (0) Table wp_comments: Total expected rows (approximate): 0
+0073.160 (0) Table wp_comments: Total rows added: 0 in 0.03 seconds
+0073.250 (0) Table wp_comments: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_comments.table.gz - 0.5 KB)
+0074.039 (0) Table wp_links: Total expected rows (approximate): 0
+0074.238 (0) Table wp_links: Total rows added: 0 in 0.02 seconds
+0074.390 (0) Table wp_links: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_links.table.gz - 0.4 KB)
+0074.777 (0) Table wp_postmeta: Total expected rows (approximate): 440
+0075.116 (0) Table wp_postmeta: Total rows added: 441 in 0.22 seconds
+0075.893 (0) Table wp_postmeta: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_postmeta.table.gz - 9.4 KB)
+0076.696 (0) Table wp_posts: Total expected rows (approximate): 234
+0077.644 (0) Table wp_posts: Total rows added: 278 in 0.85 seconds
+0077.744 (0) Table wp_posts: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_posts.table.gz - 33.1 KB)
+0077.936 (0) Table wp_term_relationships: Total expected rows (approximate): 35
+0078.003 (0) Table wp_term_relationships: Total rows added: 35 in 0.02 seconds
+0078.078 (0) Table wp_term_relationships: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_term_relationships.table.gz - 0.5 KB)
+0078.391 (0) Table wp_term_taxonomy: Total expected rows (approximate): 5
+0078.574 (0) Table wp_term_taxonomy: Total rows added: 5 in 0.07 seconds
+0078.717 (0) Table wp_term_taxonomy: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_term_taxonomy.table.gz - 0.5 KB)
+0078.936 (0) Table wp_termmeta: Total expected rows (approximate): 0
+0079.031 (0) Table wp_termmeta: Total rows added: 0 in 0.03 seconds
+0079.086 (0) Table wp_termmeta: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_termmeta.table.gz - 0.4 KB)
+0079.282 (0) Table wp_terms: Total expected rows (approximate): 5
+0079.515 (0) Table wp_terms: Total rows added: 5 in 0.08 seconds
+0079.559 (0) Table wp_terms: finishing file (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_terms.table.gz - 0.5 KB)
+0079.767 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_options.table.gz (1/12): adding to final database dump
+0079.880 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_users.table.gz (2/12): adding to final database dump
+0079.944 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_usermeta.table.gz (3/12): adding to final database dump
+0080.062 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_commentmeta.table.gz (4/12): adding to final database dump
+0080.170 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_comments.table.gz (5/12): adding to final database dump
+0080.275 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_links.table.gz (6/12): adding to final database dump
+0080.425 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_postmeta.table.gz (7/12): adding to final database dump
+0080.554 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_posts.table.gz (8/12): adding to final database dump
+0081.156 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_term_relationships.table.gz (9/12): adding to final database dump
+0081.354 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_term_taxonomy.table.gz (10/12): adding to final database dump
+0081.416 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_termmeta.table.gz (11/12): adding to final database dump
+0081.542 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db-table-wp_terms.table.gz (12/12): adding to final database dump
+0081.742 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: finished writing out complete database file (48 KB)
+0082.025 (0) Total database tables backed up: 12 (backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz, size: 57048, sha256)
+0082.258 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0082.292 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0082.333 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0082.400 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+0082.442 (0) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file has not yet been successfully uploaded: will queue
+0082.513 (0) Saving backup history. Total backup size: 50.8 MB
+0082.896 (0) Requesting upload of the files that have not yet been successfully uploaded (5)
+0083.158 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0083.194 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+0083.495 (0) ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+0083.525 (0) An error condition has occurred for the first time during this job
+0083.716 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+0083.997 (0) Number of backup sets in history: 2; groups (db): 1
+0084.353 (0) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+0084.699 (0) This backup set is the backup set just made, so will not be deleted.
+0084.699 (0) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+0084.699 (0) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0084.699 (0) Number of backup sets in history: 2; groups (files): 1
+0084.833 (0) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+0084.833 (0) This backup set is the backup set just made, so will not be deleted.
+0084.933 (0) This backup set is the backup set just made, so will not be deleted.
+0084.933 (0) This backup set is the backup set just made, so will not be deleted.
+0084.933 (0) This backup set is the backup set just made, so will not be deleted.
+0084.933 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0085.041 (0) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+0085.041 (0) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0085.041 (0) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0085.041 (0) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0085.041 (0) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0085.041 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0085.041 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0085.266 (0) Resume backup (92a6abe03a6c, 0): finish run
+0085.481 (0) Decremented the semaphore (fd) by 1
+0085.917 (0) Semaphore (fd) unlocked
+0086.131 (0) There were errors in the uploads, so the 'resume' event is remaining scheduled
+0086.932 (0) Rescheduling resumption 1: moving to 100 seconds from now (1680527198)
+0087.091 (0) O backup não foi finalizado; um recomeço foi agendado
+0390.253 (1) Opened log file at time: Mon, 03 Apr 2023 13:10:02 +0000 on http://localhost/EtecSJC
+0390.476 (1) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.15.5 WP: 4.9.8 PHP: 7.4.29 (apache2handler, Windows NT LUQUINHAS 10.0 build 19044 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/7.4.29 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 26.2M | 6M) multisite: N openssl: OpenSSL 1.1.1l  24 Aug 2021 mcrypt: N LANG:  ZipArchive::addFile: Y
+0390.715 (1) Free space on disk containing Updraft's temporary directory: 184440.2 MB
+0390.917 (1) Backup run: resumption=1, nonce=92a6abe03a6c, begun at=1680527011 (391s ago), job type=backup, previous check-in=79.6s
+0391.172 (1) Scheduling a resumption (2) after 300 seconds (1680527702) in case this run gets aborted
+0391.363 (1) Checking if we have a zip executable available
+0391.476 (1) Creation of backups of directories: already finished
+0391.585 (1) Saving backup status to database (elements: 8)
+0391.859 (1) Database dump (WordPress DB): Creation was completed already
+0392.153 (1) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0392.193 (1) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0392.259 (1) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0392.294 (1) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+0392.334 (1) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file has not yet been successfully uploaded: will queue
+0392.369 (1) Saving backup history. Total backup size: 50.8 MB
+0392.503 (1) Requesting upload of the files that have not yet been successfully uploaded (5)
+0392.641 (1) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0392.891 (1) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+0393.247 (1) ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+0393.347 (1) An error condition has occurred for the first time during this job
+0393.497 (1) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+0393.636 (1) Number of backup sets in history: 2; groups (db): 1
+0393.727 (1) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+0393.913 (1) This backup set is the backup set just made, so will not be deleted.
+0393.913 (1) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+0393.913 (1) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0393.914 (1) Number of backup sets in history: 2; groups (files): 1
+0394.198 (1) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+0394.198 (1) This backup set is the backup set just made, so will not be deleted.
+0394.820 (1) This backup set is the backup set just made, so will not be deleted.
+0395.078 (1) This backup set is the backup set just made, so will not be deleted.
+0395.079 (1) This backup set is the backup set just made, so will not be deleted.
+0395.079 (1) This backup set remains non-empty (f=1/d=1); will retain in history
+0395.275 (1) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+0395.275 (1) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0395.275 (1) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0395.275 (1) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0395.275 (1) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0395.275 (1) This backup set remains non-empty (f=1/d=1); will retain in history
+0395.457 (1) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0395.901 (1) Resume backup (92a6abe03a6c, 1): finish run
+0396.018 (1) There were errors in the uploads, so the 'resume' event is remaining scheduled
+0396.268 (1) O backup não foi finalizado; um recomeço foi agendado
+0707.029 (2) Opened log file at time: Mon, 03 Apr 2023 13:15:18 +0000 on http://localhost/EtecSJC
+0707.103 (2) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.15.5 WP: 6.2 PHP: 7.4.29 (apache2handler, Windows NT LUQUINHAS 10.0 build 19044 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/7.4.29 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 37.6M | 34M) multisite: N openssl: OpenSSL 1.1.1l  24 Aug 2021 mcrypt: N LANG:  ZipArchive::addFile: Y
+0707.167 (2) Free space on disk containing Updraft's temporary directory: 184427.1 MB
+0707.294 (2) Backup run: resumption=2, nonce=92a6abe03a6c, begun at=1680527011 (708s ago), job type=backup
+0707.400 (2) Scheduling a resumption (3) after 300 seconds (1680528019) in case this run gets aborted
+0707.555 (2) Checking if we have a zip executable available
+0707.600 (2) Creation of backups of directories: already finished
+0707.647 (2) Saving backup status to database (elements: 8)
+0707.875 (2) Database dump (WordPress DB): Creation was completed already
+0708.117 (2) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0708.194 (2) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0708.233 (2) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0708.269 (2) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+0708.308 (2) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file has not yet been successfully uploaded: will queue
+0708.344 (2) Saving backup history. Total backup size: 50.8 MB
+0708.498 (2) Requesting upload of the files that have not yet been successfully uploaded (5)
+0708.616 (2) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0708.652 (2) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+0709.052 (2) ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+0709.477 (2) An error condition has occurred for the first time during this job
+0709.740 (2) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+0709.826 (2) Number of backup sets in history: 2; groups (db): 1
+0709.894 (2) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+0710.044 (2) This backup set is the backup set just made, so will not be deleted.
+0710.044 (2) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+0710.044 (2) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0710.044 (2) Number of backup sets in history: 2; groups (files): 1
+0710.227 (2) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+0710.227 (2) This backup set is the backup set just made, so will not be deleted.
+0710.325 (2) This backup set is the backup set just made, so will not be deleted.
+0710.391 (2) This backup set is the backup set just made, so will not be deleted.
+0710.392 (2) This backup set is the backup set just made, so will not be deleted.
+0710.392 (2) This backup set remains non-empty (f=1/d=1); will retain in history
+0710.444 (2) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+0710.444 (2) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0710.444 (2) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0710.444 (2) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0710.444 (2) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+0710.444 (2) This backup set remains non-empty (f=1/d=1); will retain in history
+0710.445 (2) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0710.569 (2) Resume backup (92a6abe03a6c, 2): finish run
+0710.627 (2) There were errors in the uploads, so the 'resume' event is remaining scheduled
+0710.710 (2) O backup não foi finalizado; um recomeço foi agendado
+1026.614 (3) Opened log file at time: Mon, 03 Apr 2023 13:20:38 +0000 on http://localhost/EtecSJC
+1026.679 (3) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.15.5 WP: 6.2 PHP: 7.4.29 (apache2handler, Windows NT LUQUINHAS 10.0 build 19044 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/7.4.29 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 37.6M | 10M) multisite: N openssl: OpenSSL 1.1.1l  24 Aug 2021 mcrypt: N LANG:  ZipArchive::addFile: Y
+1026.718 (3) Free space on disk containing Updraft's temporary directory: 184399.8 MB
+1026.870 (3) Backup run: resumption=3, nonce=92a6abe03a6c, begun at=1680527011 (1027s ago), job type=backup
+1026.976 (3) Scheduling a resumption (4) after 300 seconds (1680528338) in case this run gets aborted
+1027.097 (3) Checking if we have a zip executable available
+1027.184 (3) Creation of backups of directories: already finished
+1027.296 (3) Saving backup status to database (elements: 8)
+1027.453 (3) Database dump (WordPress DB): Creation was completed already
+1027.724 (3) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+1027.841 (3) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+1027.982 (3) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+1028.085 (3) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+1028.226 (3) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file has not yet been successfully uploaded: will queue
+1028.417 (3) Saving backup history. Total backup size: 50.8 MB
+1028.645 (3) Requesting upload of the files that have not yet been successfully uploaded (5)
+1028.820 (3) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+1028.860 (3) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+1029.190 (3) ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+1029.885 (3) An error condition has occurred for the first time during this job
+1030.062 (3) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+1030.172 (3) Number of backup sets in history: 2; groups (db): 1
+1030.350 (3) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+1030.494 (3) This backup set is the backup set just made, so will not be deleted.
+1030.494 (3) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+1030.494 (3) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+1030.495 (3) Number of backup sets in history: 2; groups (files): 1
+1030.560 (3) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+1030.560 (3) This backup set is the backup set just made, so will not be deleted.
+1030.670 (3) This backup set is the backup set just made, so will not be deleted.
+1030.670 (3) This backup set is the backup set just made, so will not be deleted.
+1030.671 (3) This backup set is the backup set just made, so will not be deleted.
+1030.671 (3) This backup set remains non-empty (f=1/d=1); will retain in history
+1030.895 (3) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+1030.895 (3) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+1030.895 (3) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+1030.895 (3) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+1030.895 (3) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+1030.895 (3) This backup set remains non-empty (f=1/d=1); will retain in history
+1030.895 (3) Retain: saving new backup history (sets now: 2) and finishing retain operation
+1031.153 (3) Resume backup (92a6abe03a6c, 3): finish run
+1031.220 (3) There were errors in the uploads, so the 'resume' event is remaining scheduled
+1031.370 (3) O backup não foi finalizado; um recomeço foi agendado
+10361.868 (6) Opened log file at time: Mon, 03 Apr 2023 15:56:13 +0000 on http://localhost/EtecSJC
+10361.873 (6) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.15.5 WP: 6.2 PHP: 8.1.6 (apache2handler, Windows NT JPDESK 10.0 build 19045 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/8.1.6 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 37.3M | 38M) multisite: N openssl: OpenSSL 1.1.1n  15 Mar 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+10361.875 (6) Free space on disk containing Updraft's temporary directory: 141993.9 MB
+10361.880 (6) Backup run: resumption=6, nonce=92a6abe03a6c, begun at=1680527011 (10362s ago), job type=backup
+10361.883 (6) Long time past since expected resumption time: approx expected=1680532866.3, now=1680537373.6, diff=4507.3
+10361.886 (6) [Warning] Seu website é visitado com frequência e UpdraftPlus não esta recebendo os recursos que esperava; por favor, leia esta página: https://updraftplus.com/faqs/why-am-i-getting-warnings-about-my-site-not-having-enough-visitors/
+10361.890 (6) Scheduling a resumption (7) after 300 seconds (1680537673) in case this run gets aborted
+10361.900 (6) PHP event: code E_DEPRECATED: Optional parameter $startlevels declared before required parameter $exclude is implicitly treated as a required parameter (line 2279, C:\xampp\htdocs\EtecSJC\wp-content\plugins\updraftplus\backup.php)
+10361.905 (6) Checking if we have a zip executable available
+10361.907 (6) Creation of backups of directories: already finished
+10361.910 (6) Saving backup status to database (elements: 8)
+10361.920 (6) Database dump (WordPress DB): Creation was completed already
+10361.932 (6) PHP event: code E_DEPRECATED: strlen(): Passing null to parameter #1 ($string) of type string is deprecated (line 2121, C:\xampp\htdocs\EtecSJC\wp-content\plugins\updraftplus\backup.php)
+10361.940 (6) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+10361.943 (6) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+10361.945 (6) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+10361.947 (6) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+10361.949 (6) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file has not yet been successfully uploaded: will queue
+10361.951 (6) Saving backup history. Total backup size: 50.8 MB
+10361.957 (6) Requesting upload of the files that have not yet been successfully uploaded (5)
+10361.960 (6) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+10361.962 (6) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+10362.157 (6) ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+10362.159 (6) An error condition has occurred for the first time during this job
+10362.163 (6) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+10362.166 (6) Number of backup sets in history: 2; groups (db): 1
+10362.168 (6) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+10362.169 (6) This backup set is the backup set just made, so will not be deleted.
+10362.169 (6) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+10362.169 (6) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10362.169 (6) Number of backup sets in history: 2; groups (files): 1
+10362.171 (6) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+10362.171 (6) This backup set is the backup set just made, so will not be deleted.
+10362.172 (6) This backup set is the backup set just made, so will not be deleted.
+10362.173 (6) This backup set is the backup set just made, so will not be deleted.
+10362.173 (6) This backup set is the backup set just made, so will not be deleted.
+10362.173 (6) This backup set remains non-empty (f=1/d=1); will retain in history
+10362.175 (6) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+10362.175 (6) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10362.175 (6) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10362.175 (6) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10362.175 (6) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10362.175 (6) This backup set remains non-empty (f=1/d=1); will retain in history
+10362.175 (6) Retain: saving new backup history (sets now: 2) and finishing retain operation
+10362.179 (6) Resume backup (92a6abe03a6c, 6): finish run
+10362.182 (6) There were errors in the uploads, so the 'resume' event is remaining scheduled
+10362.185 (6) O backup não foi finalizado; um recomeço foi agendado
+10670.625 (7) Opened log file at time: Mon, 03 Apr 2023 16:01:22 +0000 on http://localhost/EtecSJC
+10670.626 (7) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.23.3 WP: 6.2 PHP: 8.1.6 (apache2handler, Windows NT JPDESK 10.0 build 19045 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB (max packet size=1048576) WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/8.1.6 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 45.1M | 46M) multisite: N openssl: OpenSSL 1.1.1n  15 Mar 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+10670.628 (7) Free space on disk containing Updraft's temporary directory: 141959 MB
+10670.630 (7) Requesting backup semaphore lock (92a6abe03a6c)
+10670.633 (7) [Info] Lock (updraft_lock_92a6abe03a6c, wp_options) acquired
+10670.636 (7) Backup run: resumption=7, nonce=92a6abe03a6c, file_nonce=92a6abe03a6c begun at=1680527011 (10671s ago), job type=backup
+10670.639 (7) Scheduling a resumption (8) after 300 seconds (1680537982) in case this run gets aborted
+10670.650 (7) Checking if we have a zip executable available
+10670.652 (7) Creation of backups of directories: already finished
+10670.654 (7) Saving backup status to database (elements: 8)
+10670.662 (7) Database dump (WordPress DB): Creation was completed already
+10670.664 (7) SQL compatibility mode is: NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION
+10670.669 (7) PHP event: code E_DEPRECATED: strlen(): Passing null to parameter #1 ($string) of type string is deprecated (line 2866, C:\xampp\htdocs\EtecSJC\wp-content\plugins\updraftplus\backup.php)
+10670.675 (7) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+10670.677 (7) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+10670.679 (7) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+10670.681 (7) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+10670.683 (7) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file has not yet been successfully uploaded: will queue
+10670.685 (7) Saving backup history. Total backup size: 50.8 MB
+10670.691 (7) Requesting upload of the files that have not yet been successfully uploaded (5)
+10670.695 (7) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+10670.697 (7) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+10670.892 (7) Google Drive: ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+10670.893 (7) An error condition has occurred for the first time during this job
+10670.896 (7) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+10670.899 (7) Number of backup sets in history: 2; groups (db): 1
+10670.900 (7) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+10670.902 (7) This backup set is the backup set just made, so will not be deleted.
+10670.902 (7) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+10670.902 (7) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10670.902 (7) Number of backup sets in history: 2; groups (files): 1
+10670.903 (7) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+10670.903 (7) This backup set is the backup set just made, so will not be deleted.
+10670.905 (7) This backup set is the backup set just made, so will not be deleted.
+10670.905 (7) This backup set is the backup set just made, so will not be deleted.
+10670.905 (7) This backup set is the backup set just made, so will not be deleted.
+10670.905 (7) This backup set remains non-empty (f=1/d=1); will retain in history
+10670.907 (7) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+10670.907 (7) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10670.907 (7) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10670.907 (7) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10670.907 (7) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+10670.907 (7) This backup set remains non-empty (f=1/d=1); will retain in history
+10670.907 (7) Retain: saving new backup history (sets now: 2) and finishing retain operation
+10670.912 (7) Resume backup (92a6abe03a6c, 7): finish run
+10670.915 (7) [Info] Lock option (updraft_lock_92a6abe03a6c, wp_options) released
+10670.917 (7) There were errors in the uploads, so the 'resume' event is remaining scheduled
+10670.920 (7) O backup não foi finalizado; um recomeço foi agendado
+11008.205 (8) Opened log file at time: Mon, 03 Apr 2023 16:06:59 +0000 on http://localhost/EtecSJC
+11008.208 (8) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.23.3 WP: 6.2 PHP: 8.1.6 (apache2handler, Windows NT JPDESK 10.0 build 19045 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB (max packet size=1048576) WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/8.1.6 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 45.1M | 56M) multisite: N openssl: OpenSSL 1.1.1n  15 Mar 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+11008.209 (8) Free space on disk containing Updraft's temporary directory: 141928.2 MB
+11008.211 (8) Requesting backup semaphore lock (92a6abe03a6c)
+11008.214 (8) [Info] Lock (updraft_lock_92a6abe03a6c, wp_options) acquired
+11008.217 (8) Backup run: resumption=8, nonce=92a6abe03a6c, file_nonce=92a6abe03a6c begun at=1680527011 (11008s ago), job type=backup
+11008.220 (8) Scheduling a resumption (9) after 300 seconds (1680538319) in case this run gets aborted
+11008.230 (8) Checking if we have a zip executable available
+11008.232 (8) Creation of backups of directories: already finished
+11008.234 (8) Saving backup status to database (elements: 8)
+11008.242 (8) Database dump (WordPress DB): Creation was completed already
+11008.244 (8) SQL compatibility mode is: NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION
+11008.248 (8) PHP event: code E_DEPRECATED: strlen(): Passing null to parameter #1 ($string) of type string is deprecated (line 2866, C:\xampp\htdocs\EtecSJC\wp-content\plugins\updraftplus\backup.php)
+11008.250 (8) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+11008.252 (8) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+11008.254 (8) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+11008.255 (8) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+11008.257 (8) backup_2023-04-03-1003_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file is not ours to upload and has been/will be handled by another job.
+11008.259 (8) Saving backup history. Total backup size: Unknown
+11008.263 (8) Requesting upload of the files that have not yet been successfully uploaded (4)
+11008.268 (8) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+11008.269 (8) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+11008.470 (8) Google Drive: ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+11008.472 (8) An error condition has occurred for the first time during this job
+11008.476 (8) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+11008.479 (8) Number of backup sets in history: 2; groups (db): 1
+11008.480 (8) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+11008.482 (8) This backup set is the backup set just made, so will not be deleted.
+11008.482 (8) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+11008.482 (8) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11008.482 (8) Number of backup sets in history: 2; groups (files): 1
+11008.483 (8) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+11008.483 (8) This backup set is the backup set just made, so will not be deleted.
+11008.485 (8) This backup set is the backup set just made, so will not be deleted.
+11008.485 (8) This backup set is the backup set just made, so will not be deleted.
+11008.485 (8) This backup set is the backup set just made, so will not be deleted.
+11008.485 (8) This backup set remains non-empty (f=1/d=1); will retain in history
+11008.487 (8) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+11008.487 (8) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11008.487 (8) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11008.487 (8) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11008.487 (8) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11008.487 (8) This backup set remains non-empty (f=1/d=1); will retain in history
+11008.488 (8) Retain: saving new backup history (sets now: 2) and finishing retain operation
+11008.491 (8) Resume backup (92a6abe03a6c, 8): finish run
+11008.494 (8) [Info] Lock option (updraft_lock_92a6abe03a6c, wp_options) released
+11008.497 (8) There were errors in the uploads, so the 'resume' event is remaining scheduled
+11008.500 (8) O backup não foi finalizado; um recomeço foi agendado
+11311.437 (9) Opened log file at time: Mon, 03 Apr 2023 16:12:03 +0000 on http://localhost/EtecSJC
+11311.440 (9) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.23.3 WP: 6.2 PHP: 8.1.6 (apache2handler, Windows NT JPDESK 10.0 build 19045 (Windows 10) AMD64) MySQL: 10.4.24-MariaDB (max packet size=1048576) WPLANG: pt_BR Server: Apache/2.4.53 (Win64) OpenSSL/1.1.1n PHP/8.1.6 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 45.1M | 52M) multisite: N openssl: OpenSSL 1.1.1n  15 Mar 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+11311.442 (9) Free space on disk containing Updraft's temporary directory: 141915.6 MB
+11311.444 (9) Requesting backup semaphore lock (92a6abe03a6c)
+11311.447 (9) [Info] Lock (updraft_lock_92a6abe03a6c, wp_options) acquired
+11311.450 (9) Backup run: resumption=9, nonce=92a6abe03a6c, file_nonce=92a6abe03a6c begun at=1680527011 (11312s ago), job type=backup
+11311.453 (9) The current run is resumption number 9, and there was nothing useful done on the last run (last useful run: 0) - will not schedule a further attempt until we see something useful happening this time
+11311.457 (9) Scheduling a resumption (10) after 300 seconds (1680538623); but the job will then be aborted unless something happens this time
+11311.468 (9) Creation of backups of directories: already finished
+11311.470 (9) Saving backup status to database (elements: 8)
+11311.479 (9) Database dump (WordPress DB): Creation was completed already
+11311.481 (9) SQL compatibility mode is: NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION
+11311.486 (9) PHP event: code E_DEPRECATED: strlen(): Passing null to parameter #1 ($string) of type string is deprecated (line 2866, C:\xampp\htdocs\EtecSJC\wp-content\plugins\updraftplus\backup.php)
+11311.488 (9) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+11311.490 (9) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+11311.492 (9) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+11311.493 (9) backup_2023-04-03-1103_Etec_So_Jos_dos_Campos_92a6abe03a6c-others.zip: others: This file has not yet been successfully uploaded: will queue
+11311.495 (9) backup_2023-04-03-1003_Etec_So_Jos_dos_Campos_92a6abe03a6c-db.gz: db: This file is not ours to upload and has been/will be handled by another job.
+11311.497 (9) Saving backup history. Total backup size: Unknown
+11311.501 (9) Requesting upload of the files that have not yet been successfully uploaded (4)
+11311.504 (9) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+11311.507 (9) Beginning dispatch of backup to remote (googledrive) (instance identifier s-2589fb975e2fd67534b3d34abd8e174f)
+11311.701 (9) Google Drive: ERROR: Have not yet obtained an access token from Google (has the user authorised?) (Invalid request (refresh token not present).) (no_refresh_token)
+11311.703 (9) An error condition has occurred for the first time during this job
+11311.707 (9) Retain: beginning examination of existing backup sets; user setting: retain_files=1, retain_db=1
+11311.709 (9) Number of backup sets in history: 2; groups (db): 1
+11311.711 (9) Examining (for databases) backup set with group_id=0, nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+11311.712 (9) This backup set is the backup set just made, so will not be deleted.
+11311.713 (9) Examining (for databases) backup set with group_id=0, nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+11311.713 (9) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11311.713 (9) Number of backup sets in history: 2; groups (files): 1
+11311.714 (9) Examining (for files) backup set with nonce=92a6abe03a6c, datestamp=1680527011 (Apr 03 2023 13:03:31)
+11311.714 (9) This backup set is the backup set just made, so will not be deleted.
+11311.715 (9) This backup set is the backup set just made, so will not be deleted.
+11311.715 (9) This backup set is the backup set just made, so will not be deleted.
+11311.716 (9) This backup set is the backup set just made, so will not be deleted.
+11311.716 (9) This backup set remains non-empty (f=1/d=1); will retain in history
+11311.717 (9) Examining (for files) backup set with nonce=2f3820f86bb5, datestamp=1543034781 (Nov 24 2018 04:46:21)
+11311.718 (9) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11311.718 (9) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11311.718 (9) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11311.718 (9) This backup set (1543034781) was an 'Always Keep' backup, so it will not be pruned. Skipping.
+11311.718 (9) This backup set remains non-empty (f=1/d=1); will retain in history
+11311.718 (9) Retain: saving new backup history (sets now: 2) and finishing retain operation
+11311.721 (9) Resume backup (92a6abe03a6c, 9): finish run
+11311.723 (9) [Info] Lock option (updraft_lock_92a6abe03a6c, wp_options) released
+11311.725 (9) The resumption is being cancelled, as it was only scheduled to enable error reporting, which can be performed now
+11311.728 (9) Fetching RSS news feed
+11312.947 (9) Fetched RSS news feed; result is a: SimplePie
+11312.973 (9) Sending email ('Arquivos e banco de dados (Backup completo)') report (attachments: 1, size: 51.4 KB) to: etecs...
+11312.981 (9) An error occurred when sending a backup report email and/or backup file(s) via email (wp_mail_failed): Invalid address:  (From): wordpress@localhost
+11312.982 (9) A tentativa de backup terminou, aparentemente sem sucesso

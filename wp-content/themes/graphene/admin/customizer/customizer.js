@@ -1,24 +1,38 @@
 jQuery(document).ready(function ($) {
 
 	/* Highlight new features */
-	$('#accordion-panel-graphene-general .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-panel-graphene-general .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	$('#accordion-panel-graphene-display .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-panel-graphene-utilities .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#accordion-panel-graphene-stacks .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#accordion-section-title_tagline .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#accordion-section-graphene-general-header .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#accordion-section-graphene-general-slider .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-section-graphene-general-header .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-section-graphene-general-slider .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#accordion-section-graphene-general-social-profiles .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#accordion-section-graphene-general-mentions-bar .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#accordion-section-graphene-display-posts .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#customize-control-graphene_settings-slider_disable_caption label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#customize-control-graphene_settings-slider_exclude_posts .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#customize-control-graphene_settings-slider_exclude_posts_cats .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#customize-control-graphene_settings-disable_yarpp_template label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
-	$('#customize-control-graphene_settings-enable_sticky_menu label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-section-graphene-general-live-search .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-section-graphene-general-adsense .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	$('#accordion-section-graphene-display-typography .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-section-graphene-display-columns-layout .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-slider_disable_caption label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-slider_exclude_posts .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-slider_exclude_posts_cats .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-disable_yarpp_template label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-enable_sticky_menu label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#customize-control-graphene_settings-container_style .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#customize-control-graphene_settings-mobile_left_column_first label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#customize-control-graphene_settings-social_media_location label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 	// $('#customize-control-graphene_settings-slider_as_header label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-adsense_max_count .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-slider_post_types .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-home_column_mode .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-blog_column_mode .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-pages_column_mode .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-hide_reading_time label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-adsense_max_count .customize-control-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#accordion-section-graphene-utilities-child-theme .accordion-section-title').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	// $('#customize-control-graphene_settings-hide_post_featured_image label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
+	$('#customize-control-graphene_settings-disable_google_fonts label').append('<span class="new-label">' + grapheneCustomizer.l10n.new + '</span>');
 
 	/* Confirm click */
 	$(document).on( 'click', '.confirm-click', function(e){
@@ -135,8 +149,8 @@ jQuery(document).ready(function ($) {
 
 	/* Container */
 	$('#container_width-slider').slider({
-		min: 800,
-		max: 1400,
+		min: 400,
+		max: 2000,
 		step: 10,
 		value: container_width,
 		slide: function (event, ui) {
@@ -327,7 +341,7 @@ jQuery(document).ready(function ($) {
 
 		html = '<li class="graphene-social-profile graphene-sortable ui-sortable-handle">\
                     <span class="customize-control-title">\<i class="fa fa-' + profileType + '"></i>' + profileType + '</span>\
-                	<input type="hidden" name="social-profile-data" data-type="' + profileType + '" data-name="' + profileType + '" data-title="' + profileType + '" data-url="' + profileUrl + '" data-icon-url="' + profileIconUrl + '" data-icon-name="' + profileIconName + '">\
+                	<input type="hidden" name="social-profile-data" data-type="' + profileType + '" data-name="' + profileType + '" data-title="' + profileDesc + '" data-url="' + profileUrl + '" data-icon-url="' + profileIconUrl + '" data-icon-name="' + profileIconName + '">\
                     <div class="inline-field">\
                     	<label>Description</label>\
                     	<input type="text" data-key="title" value="' + profileDesc + '">\

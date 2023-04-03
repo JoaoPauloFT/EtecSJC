@@ -11,9 +11,6 @@
 	font-size: 11px;
 	line-height: 16px;
 }
-#customize-control-graphene_settings-custom_css .CodeMirror {
-	height: 400px;
-}
 .customize-control .graphene-text input {
 	width: auto !important;
 }
@@ -165,14 +162,15 @@
 }
 .graphene-plus-feature span {
 	width: 100%;
+	width: calc(100% + 2px);
 	font-size: 12px;
 	padding: 5px 10px;
-	margin: 0;
+	margin: -1px -1px 0;
 }
 #customize-controls .graphene-plus-feature img {
 	margin: 10px;
 	opacity: 0.6;
-	max-width: 95%;
+	max-width: 96%;
 	height: auto;
 }
 .new-label {
@@ -198,4 +196,25 @@
 	width: 150px;
 	height: 50px;
 	border: 1px dashed #ddd;
+}
+.customize-control .customize-inside-control-row.hide-radio {
+	margin-left: 0;
+	margin-right: 10px;
+	display: inline-block;
+}
+.customize-control-radio .hide-radio input {
+	margin-left: -9999em;
+}
+.customize-control-radio .hide-radio label {
+	display: inline-block;
+	width: 60px;
+	height: 40px;
+	overflow: hidden;
+}
+#customize-controls .customize-control-radio .hide-radio label img {
+	float: left;
+	max-width: none;
+}
+#customize-controls .customize-control-radio .hide-radio input:checked ~ img {
+	float: right;
 }

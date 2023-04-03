@@ -16,7 +16,7 @@ function graphene_build_style( $styles, $extra_args = array() ){
 	foreach ( $styles as $opts => $style ) {
 		if ( stripos( $opts, '|' ) !== false ) $opts = explode( '|', $opts );
 		else $opts = (array) $opts;
-		
+
 		if ( graphene_is_settings_custom( $opts ) ) {
 			foreach ( $opts as $key => $opt ) {
 
@@ -218,20 +218,25 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 	$style = '';
     
 	if ( ! is_admin() || ( $graphene_settings['hook_suffix'] == $hook_suffix && $tab == 'colours' ) || $force_all ) {
-		
+
 		// Top bar
 		$colours = array(
-			'top_bar_bg'	=> '#top-bar{background-color:%s}',
+			'top_bar_bg'	=> '.top-bar{background-color:%1$s} .top-bar .searchform .btn-default, .top-bar #top_search .searchform .btn-default{color:%1$s}',
+			'top_bar_fg'	=> '.top-bar, .top-bar input{color:%1$s} .top-bar .searchform .btn-default, .top-bar #top_search .searchform .btn-default{background:%1$s}',
+			'top_bar_link'	=> '.top-bar a, .top-bar a:hover {color:%s}',
 		);
 		$style .= graphene_build_style( $colours );
 
 		 
 		// Primary Menu (top level)
 		$colours = array(
-			'menu_primary_bg'				=> '.navbar {background: %s}',
-			'menu_primary_item'				=> '.navbar-inverse .nav > li > a {color: %s}',
-			'menu_primary_active_bg'		=> '.navbar #header-menu-wrap .nav li:focus, .navbar #header-menu-wrap .nav li:hover, .navbar #header-menu-wrap .nav li.current-menu-item, .navbar #header-menu-wrap .nav li.current-menu-ancestor, .navbar #header-menu-wrap .dropdown-menu li, .navbar #header-menu-wrap .dropdown-menu > li > a:focus, .navbar #header-menu-wrap .dropdown-menu > li > a:hover, .navbar #header-menu-wrap .dropdown-menu > .active > a, .navbar #header-menu-wrap .dropdown-menu > .active > a:focus, .navbar #header-menu-wrap .dropdown-menu > .active > a:hover, .navbar #header-menu-wrap .navbar-nav>.open>a, .navbar #header-menu-wrap .navbar-nav>.open>a:focus, .navbar #header-menu-wrap .navbar-nav>.open>a:hover, .navbar .navbar-nav>.active>a, .navbar .navbar-nav>.active>a:focus, .navbar .navbar-nav>.active>a:hover {background: %s}',
-			'menu_primary_active_item'		=> 	'.navbar #header-menu-wrap .navbar-nav>.active>a, .navbar #header-menu-wrap .navbar-nav>.active>a:focus, .navbar #header-menu-wrap .navbar-nav>.active>a:hover, .navbar #header-menu-wrap .navbar-nav>.open>a, .navbar #header-menu-wrap .navbar-nav>.open>a:focus, .navbar #header-menu-wrap .navbar-nav>.open>a:hover, .navbar #header-menu-wrap .navbar-nav>.current-menu-item>a, .navbar #header-menu-wrap .navbar-nav>.current-menu-item>a:hover, .navbar #header-menu-wrap .navbar-nav>.current-menu-item>a:focus, .navbar #header-menu-wrap .navbar-nav>.current-menu-ancestor>a, .navbar #header-menu-wrap .navbar-nav>.current-menu-ancestor>a:hover, .navbar #header-menu-wrap .navbar-nav>.current-menu-ancestor>a:focus, .navbar #header-menu-wrap .navbar-nav>li>a:focus, .navbar #header-menu-wrap .navbar-nav>li>a:hover {color: %s}',
+			'menu_primary_bg'				=> '.navbar {background: %1$s}
+				@media only screen and (max-width: 768px) {
+					#mega-menu-wrap-Header-Menu .mega-menu-toggle + #mega-menu-Header-Menu {background: %1$s}
+				}',
+			'menu_primary_item'				=> '.navbar-inverse .nav > li > a, #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-menu-item > a.mega-menu-link, .navbar #top_search .searchform input {color: %s}',
+			'menu_primary_active_bg'		=> '.navbar #header-menu-wrap .nav li:focus, .navbar #header-menu-wrap .nav li:hover, .navbar #header-menu-wrap .nav li.current-menu-item, .navbar #header-menu-wrap .nav li.current-menu-ancestor, .navbar #header-menu-wrap .dropdown-menu li, .navbar #header-menu-wrap .dropdown-menu > li > a:focus, .navbar #header-menu-wrap .dropdown-menu > li > a:hover, .navbar #header-menu-wrap .dropdown-menu > .active > a, .navbar #header-menu-wrap .dropdown-menu > .active > a:focus, .navbar #header-menu-wrap .dropdown-menu > .active > a:hover, .navbar #header-menu-wrap .navbar-nav>.open>a, .navbar #header-menu-wrap .navbar-nav>.open>a:focus, .navbar #header-menu-wrap .navbar-nav>.open>a:hover, .navbar .navbar-nav>.active>a, .navbar .navbar-nav>.active>a:focus, .navbar .navbar-nav>.active>a:hover, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu li.mega-current-menu-item, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-menu-item > a.mega-menu-link:hover, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-toggle-on > a.mega-menu-link, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-current-menu-item > a.mega-menu-link {background: %s}',
+			'menu_primary_active_item'		=> '.navbar #header-menu-wrap .navbar-nav>.active>a, .navbar #header-menu-wrap .navbar-nav>.active>a:focus, .navbar #header-menu-wrap .navbar-nav>.active>a:hover, .navbar #header-menu-wrap .navbar-nav>.open>a, .navbar #header-menu-wrap .navbar-nav>.open>a:focus, .navbar #header-menu-wrap .navbar-nav>.open>a:hover, .navbar #header-menu-wrap .navbar-nav>.current-menu-item>a, .navbar #header-menu-wrap .navbar-nav>.current-menu-item>a:hover, .navbar #header-menu-wrap .navbar-nav>.current-menu-item>a:focus, .navbar #header-menu-wrap .navbar-nav>.current-menu-ancestor>a, .navbar #header-menu-wrap .navbar-nav>.current-menu-ancestor>a:hover, .navbar #header-menu-wrap .navbar-nav>.current-menu-ancestor>a:focus, .navbar #header-menu-wrap .navbar-nav>li>a:focus, .navbar #header-menu-wrap .navbar-nav>li>a:hover, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu li.mega-current-menu-item, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-menu-item > a.mega-menu-link:hover, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-toggle-on > a.mega-menu-link, #header-menu-wrap #mega-menu-wrap-Header-Menu #mega-menu-Header-Menu > li.mega-current-menu-item > a.mega-menu-link {color: %s}',
 			'menu_primary_dd_item'			=> '.navbar #header-menu-wrap .nav ul li a, .navbar #header-menu-wrap .nav ul li a {color: %s}',
 			'menu_primary_dd_active_item'	=> '.navbar #header-menu-wrap .nav .dropdown-menu li:hover > a, .navbar #header-menu-wrap .nav .dropdown-menu li.current-menu-item > a, .navbar #header-menu-wrap .nav .dropdown-menu li.current-menu-ancestor > a {color: %s}'
 		);
@@ -257,12 +262,12 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 		
 		// Content area
 		$colours = array(
-			'content_wrapper_bg' 	=> '#content, #header {background-color: %s}',
-			'content_bg' 			=> '.post, .singular .post {background-color: %s;}',
+			'content_wrapper_bg' 	=> '#content, body > .container > .panel-layout, #header {background-color: %s}',
+			'content_bg' 			=> '.post, .singular .post, .singular .posts-list .post, .homepage_pane, .entry-author {background-color: %s;}',
 			'meta_border'			=> '.entry-footer {border-color: %s;}',
 			'content_font_colour' 	=> 'body, blockquote p {color: %s}',
 			'title_font_colour' 	=> '.post-title, .post-title a, .post-title a:hover, .post-title a:visited {color: %s}',
-			'link_colour_normal' 	=> 'a, .post .date .day, .pagination>li>a, .pagination>li>a:hover, .pagination>li>span, #comments > h4.current a, #comments > h4.current a .fa, .post-nav-top p, .post-nav-top a {color: %s}',
+			'link_colour_normal' 	=> 'a, .post .date .day, .pagination>li>a, .pagination>li>a:hover, .pagination>li>span, #comments > h4.current a, #comments > h4.current a .fa, .post-nav-top p, .post-nav-top a, .autocomplete-suggestions strong {color: %s}',
 			'link_colour_hover' 	=> 'a:focus, a:hover, .post-nav-top a:hover {color: %s}',
 			'sticky_border' 		=> '.sticky {border-color: %s;}',
 			'child_page_content_bg' => '.child-page {background-color: %s;}',
@@ -290,7 +295,9 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 		
 		// Buttons and Labels
 		$colours = array(
-			'button_bg|button_label'=> '.btn, .Button, .colour-preview .button, input[type="submit"], button[type="submit"], #commentform #submit, .wpsc_buy_button, #back-to-top, .wp-block-button .wp-block-button__link:not(.has-background) {background: %1$s; color: %2$s}',
+			'button_bg|button_label'=> '.btn, .btn:focus, .btn:hover, .btn a, .Button, .colour-preview .button, input[type="submit"], button[type="submit"], #commentform #submit, .wpsc_buy_button, #back-to-top, .wp-block-button .wp-block-button__link:not(.has-background) {background: %1$s; color: %2$s}
+				.wp-block-button.is-style-outline .wp-block-button__link {background:transparent; border-color: %1$s}',
+			'button_bg'				=> '.btn.btn-outline, .btn.btn-outline:hover {color: %1$s;border-color: %1$s;}',
 			'label_bg|label_text'	=> '.label-primary, .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover, .list-group-item.parent, .list-group-item.parent:focus, .list-group-item.parent:hover {background: %1$s; border-color: %1$s; color: %2$s}'
 		);
 		$style .= graphene_build_style( $colours );
@@ -298,9 +305,9 @@ function graphene_get_custom_colours( $hook_suffix = '', $force_all = false ){
 
         // Archive
 		$colours = array(
-			'archive_bg|archive_border'	=> '.post-nav-top, .archive-title, .page-title, .category-desc, .breadcrumb {background-color: %1$s; border-color: %2$s}',
+			'archive_bg|archive_border'	=> '.post-nav-top, .archive-title, .page-title, .term-desc, .breadcrumb {background-color: %1$s; border-color: %2$s}',
 			'archive_label' 			=> '.archive-title span {color: %s}',
-			'archive_text'				=> '.page-title, .archive-title, .category-desc {color: %s}',
+			'archive_text'				=> '.page-title, .archive-title, .term-desc {color: %s}',
 		);
 		$style .= graphene_build_style( $colours );
 
@@ -388,7 +395,6 @@ add_action( 'wp_head', 'graphene_custom_style' );
  * appropriate head element for the favicon
 */
 function graphene_favicon(){
-	
 	/* If user has set a WordPress site icon, use that and remove the previous Graphene favicon settings */
 	if ( get_option( 'site_icon' ) ) {
 		$current_settings = get_option( 'graphene_settings' );
@@ -399,16 +405,7 @@ function graphene_favicon(){
 			global $graphene_settings;
 			$graphene_settings = graphene_get_settings();
 		}
-		return;
 	}
-
-	global $graphene_settings;
-	if ( $graphene_settings['favicon_url'] ) { ?>
-		<link rel="icon" href="<?php echo $graphene_settings['favicon_url']; ?>" type="image/x-icon" />
-	<?php
-    } elseif ( is_file( ABSPATH . 'favicon.ico' ) ){ ?>
-		<link rel="icon" href="<?php echo home_url(); ?>/favicon.ico" type="image/x-icon" />
-	<?php }
 }
 add_action( 'wp_head', 'graphene_favicon' );
 

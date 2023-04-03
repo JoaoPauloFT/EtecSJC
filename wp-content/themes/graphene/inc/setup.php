@@ -45,12 +45,16 @@ if ( ! function_exists( 'graphene_setup' ) ):
  */
 function graphene_setup() {
 	global $graphene_settings, $graphene_defaults, $content_width;
+	
+	add_filter( 'graphene_settings', 'graphene_customizer_filter_settings', 999 );
+
 	graphene_init_settings();
 	
 	$content_width = graphene_get_content_width();
 		
 	// Add custom image sizes selectively
 	add_image_size( 'graphene_slider', graphene_get_slider_image_width(), $graphene_settings['slider_height'], true );
+	add_image_size( 'graphene_featured_image', $content_width, 0, false );
 
 	if ( get_option( 'show_on_front' ) == 'page' && !$graphene_settings['disable_homepage_panes']) {
 		$pane_width = floor( $content_width / 2 );
@@ -59,6 +63,7 @@ function graphene_setup() {
 	
 	// Add support for editor syling
 	if ( ! $graphene_settings['disable_editor_style'] ){
+		add_theme_support( 'editor-styles' );
 		add_editor_style( array( 
 			GRAPHENE_ROOTURI . '/bootstrap/css/bootstrap.min.css',
 			'editor-style.css'
@@ -120,7 +125,43 @@ function graphene_setup() {
 
 	/* Add responsive embeds */
 	add_filter( 'embed_oembed_html', 'graphene_responsive_embed', 10, 3 );
-        
+	add_theme_support( 'responsive-embeds' );
+
+	/* Adds support for editor font sizes */
+	add_theme_support( 'custom-line-height' );
+	add_theme_support( 'editor-font-sizes', array(
+		array(
+			'name'      => __( 'Tiny', 'graphene' ),
+			'shortName' => __( 'XS', 'graphene' ),
+			'size'      => 10,
+			'slug'      => 'tiny'
+		),
+		array(
+			'name'      => __( 'Small', 'graphene' ),
+			'shortName' => __( 'S', 'graphene' ),
+			'size'      => 14,
+			'slug'      => 'small'
+		),
+		array(
+			'name'      => __( 'Regular', 'graphene' ),
+			'shortName' => __( 'M', 'graphene' ),
+			'size'      => 16,
+			'slug'      => 'regular'
+		),
+		array(
+			'name'      => __( 'Large', 'graphene' ),
+			'shortName' => __( 'L', 'graphene' ),
+			'size'      => 20,
+			'slug'      => 'large'
+		),
+		array(
+			'name'      => __( 'Larger', 'graphene' ),
+			'shortName' => __( 'XL', 'graphene' ),
+			'size'      => 26,
+			'slug'      => 'larger'
+		)
+	) );
+
     do_action( 'graphene_setup' );
 }
 endif;
@@ -209,18 +250,18 @@ function graphene_widgets_init() {
 		
 		register_sidebar(array( 'name' => __( 'Graphene - Right Sidebar', 'graphene' ),
 			'id' 			=> 'sidebar-widget-area',
-			'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s">',
+			'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s">',
 			'after_widget' 	=> '</div>',
-			'before_title' 	=> "<h3>",
-			'after_title' 	=> "</h3>",
+			'before_title' 	=> '<h2 class="widget-title">',
+			'after_title' 	=> "</h2>",
 		) );
                 
 		register_sidebar(array( 'name' => __( 'Graphene - Left Sidebar', 'graphene' ),
 			'id' 			=> 'sidebar-two-widget-area',
-			'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s">',
+			'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s">',
 			'after_widget' 	=> '</div>',
-			'before_title' 	=> "<h3>",
-			'after_title' 	=> "</h3>",
+			'before_title' 	=> '<h2 class="widget-title">',
+			'after_title' 	=> "</h2>",
 		) );
 		
 
@@ -237,10 +278,10 @@ function graphene_widgets_init() {
 		register_sidebar(array( 'name' => __( 'Graphene - Footer', 'graphene' ),
 			'id' 			=> 'footer-widget-area',
 			'description' 	=> __( "The footer widget area. Leave empty to disable. Set the number of columns to display at the theme's Display Options page.", 'graphene' ),
-			'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s ' . $cols . '">',
+			'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s ' . $cols . '">',
 			'after_widget' 	=> '</div>',
-			'before_title' 	=> "<h3>",
-			'after_title' 	=> "</h3>",
+			'before_title' 	=> '<h2 class="widget-title">',
+			'after_title' 	=> "</h2>",
 		) );
 		
 		/**
@@ -254,19 +295,19 @@ function graphene_widgets_init() {
 			register_sidebar( array( 'name' => __( 'Graphene - Sidebar One (Front Page)', 'graphene' ),
 				'id' => 'home-sidebar-widget-area',
 				'description' => __( 'The first sidebar widget area that will only be displayed on the front page.', 'graphene' ),
-				'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s">',
+				'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s">',
 				'after_widget' => '</div>',
-				'before_title' => "<h3>",
-				'after_title' => "</h3>",
+				'before_title' => '<h2 class="widget-title">',
+				'after_title' => "</h2>",
 			) );
 			
 			register_sidebar(array( 'name' => __( 'Graphene - Sidebar Two (Front Page)', 'graphene' ),
 				'id' => 'home-sidebar-two-widget-area',
 				'description' => __( 'The second sidebar widget area that will only be displayed on the front page.', 'graphene' ),
-				'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s">',
+				'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s">',
 				'after_widget' => '</div>',
-				'before_title' => "<h3>",
-				'after_title' => "</h3>",
+				'before_title' => '<h2 class="widget-title">',
+				'after_title' => "</h2>",
 			) );
 		}
 		
@@ -274,10 +315,10 @@ function graphene_widgets_init() {
 			register_sidebar(array( 'name' => __( 'Graphene - Footer (Front Page)', 'graphene' ),
 				'id' => 'home-footer-widget-area',
 				'description' => __( "The footer widget area that will only be displayed on the front page. Leave empty to disable. Set the number of columns to display at the theme's Display Options page.", 'graphene' ),
-				'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s ' . $cols . '">',
+				'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s ' . $cols . '">',
 				'after_widget' => '</div>',
-				'before_title' => "<h3>",
-				'after_title' => "</h3>",
+				'before_title' => '<h2 class="widget-title">',
+				'after_title' => "</h2>",
 			) );
 		}
 		
@@ -286,27 +327,30 @@ function graphene_widgets_init() {
 			register_sidebar(array( 'name' => __( 'Graphene - Header', 'graphene' ),
 				'id' => 'header-widget-area',
 				'description' => __("The header widget area.", 'graphene' ),
-				'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s">',
+				'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s">',
 				'after_widget' => '</div>',
-				'before_title' => "<h3>",
-				'after_title' => "</h3>",
+				'before_title' => '<h2 class="widget-title">',
+				'after_title' => "</h2>",
 			) );
 		endif;
                 
+
+        if ( ! is_array( $graphene_settings['widget_hooks'] ) ) $graphene_settings['widget_hooks'] = explode( ',', $graphene_settings['widget_hooks'] );
+        
 		/* Action hooks widget areas */
 		if ( count( $graphene_settings['widget_hooks'] ) > 0 ) {
 			$available_hooks = graphene_get_action_hooks( true );
-			
+
 			foreach ($graphene_settings['widget_hooks'] as $hook) {
 				if (in_array($hook, $available_hooks)) {
 					register_sidebar(array(
 						'name' => ucwords( str_replace('_', ' ', $hook) ),
 						'id' => $hook,
 						'description' => sprintf( __("Dynamically added widget area. This widget area is attached to the %s action hook.", 'graphene'), "'$hook'" ),
-						'before_widget' => '<div id="%1$s" class="sidebar-wrap clearfix %2$s">',
+						'before_widget' => '<div id="%1$s" class="sidebar-wrap %2$s">',
 						'after_widget' => '</div>',
-						'before_title' => "<h3>",
-						'after_title' => "</h3>",
+						'before_title' => '<h2 class="widget-title">',
+						'after_title' => "</h2>",
 					));
 					// to display the widget dynamically attach the dynamic method
 					add_action( $hook, 'graphene_display_dynamic_widget_hooks' );
@@ -342,5 +386,25 @@ function graphene_display_dynamic_widget_hooks(){
  * Adds a responsive embed wrapper around oEmbed content
  */
 function graphene_responsive_embed( $html, $url, $attr ) {
+	global $post;
+
+	if ( stripos( $post->post_content, '<!-- wp:' ) !== false ) return $html;
     return $html !== '' ? '<div class="embed-container">' . $html . '</div>' : '';
 }
+
+
+/**
+ * Load bundled language files for languages with incomplete WordPress Polyglot translation
+ */
+function graphene_load_textdomain_mofile( $mofile, $domain ){
+
+	if ( $domain == 'graphene' && stripos( $mofile, 'wp-content/languages' ) !== false ) {
+		$locale = apply_filters( 'theme_locale', determine_locale(), $domain );
+		if ( is_readable( GRAPHENE_ROOTDIR . '/languages/' . $locale . '.mo' ) ) {
+			$mofile = GRAPHENE_ROOTDIR . '/languages/' . $locale . '.mo';
+		}
+	}
+
+	return $mofile;
+}
+add_action( 'load_textdomain_mofile', 'graphene_load_textdomain_mofile', 10, 2 );

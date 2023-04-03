@@ -27,7 +27,7 @@ if ( file_exists( $mobile_path ) ) { include( $mobile_path ); }
 */
 global $graphene_settings;
 require( GRAPHENE_ROOTDIR . '/admin/options-init.php'	);
-require( GRAPHENE_ROOTDIR . '/admin/editor.php'	);
+require( GRAPHENE_ROOTDIR . '/admin/editor.php'			);
 require( GRAPHENE_ROOTDIR . '/inc/scripts.php' 			);
 require( GRAPHENE_ROOTDIR . '/inc/utils.php' 			);
 require( GRAPHENE_ROOTDIR . '/inc/head.php' 			);
@@ -46,8 +46,12 @@ require( GRAPHENE_ROOTDIR . '/inc/plugins.php' 			);
 require( GRAPHENE_ROOTDIR . '/inc/compat.php' 			);
 require( GRAPHENE_ROOTDIR . '/inc/functions.php' 		);
 require( GRAPHENE_ROOTDIR . '/inc/setup.php' 			);
-require( GRAPHENE_ROOTDIR . '/vendors/menu-item-custom-fields/menu-item-custom-fields.php' );
+require( GRAPHENE_ROOTDIR . '/inc/ajax-handler.php' 	);
 
+/* Menu Item Custom Fields, for older WordPress versions */
+if ( version_compare( $GLOBALS['wp_version'], 5.4, '<' ) ) {
+	require( GRAPHENE_ROOTDIR . '/vendors/menu-item-custom-fields/menu-item-custom-fields.php' );
+}
 
 /**
  * Graphene Plus
