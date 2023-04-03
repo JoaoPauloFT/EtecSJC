@@ -12,23 +12,18 @@ O sistema foi totalmente desenvolvido em _PHP_ com _MySQL_. Utilizado o framewor
 
 ## Partes a melhorar/desenvolver:
 
-- [ ] Criar um sistema de relatórios;
-- [ ] Criar um gerenciador de úsuarios (Criando um sistema de permissões, para bloquear determinadas ações no sistema);
-- [ ] Criar importações e exportações de informações por excel; e
-- [ ] Trabalhar na parte visual do sistema.
+- [ ] Melhorar design na tela de contatos.
+- [ ] Tela com o corpo docente da instuição; e
+- [ ] Tela de FAQ e sugestões a instituição.
 
 ## Ilustrações do sistema:
 
-- Página Principal do Sistema:
-![Página Principal do Sistema.](https://user-images.githubusercontent.com/44526943/154386767-abfb9926-335a-4166-a7e1-77dcf68c8f43.png)
+- Página Inicial do Site:
+![Página Inicial do Site](https://user-images.githubusercontent.com/44526943/229582658-7d1edf8e-c216-4f9b-a767-065229421ebe.png)
 
+- Página de Projetos:
+![Página de Projetos](https://user-images.githubusercontent.com/44526943/229582846-8fa33b08-150a-4c60-a0cd-61fa40f70b36.png)
 
-- Página de Clientes:
-![Página de Clientes.](https://user-images.githubusercontent.com/44526943/154386407-059dcafe-1ff6-4c3a-843a-52768579fcc1.png)
+- Página Sobre a História da Instituição:
+![Página Sobre a História da Instituição](https://user-images.githubusercontent.com/44526943/229583132-7b588ccc-edd8-4bf2-834e-90bc9f2862bd.png)
 
-- Página de Pizzas:
-![Página de Pizza.](https://user-images.githubusercontent.com/44526943/154386577-5bbfab31-32d1-49ff-b199-64a23e6fc09c.png)
-
-
-- Página de Pedidos:
-![Página de Pedidos.](https://user-images.githubusercontent.com/44526943/154386649-65695425-d2d1-4a62-b9d3-32cf7dab8bfe.png)
