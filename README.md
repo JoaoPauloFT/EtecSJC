@@ -1,4 +1,4 @@
-# Sita da Etec São José dos Campos
+# Site da Etec São José dos Campos
 
 ## Sobre o projeto:
 
@@ -34,7 +34,7 @@ O sistema foi totalmente desenvolvido em _PHP_ com _MySQL_. Utilizado o framewor
 3. Cole os todos os arquivos do repositório em seu servidor.
 4. Acesse para conferir se está tudo certo.
 
-- Caso queira acessar a area admin, faça os seguintes passos:
+Caso queira acessar a area admin, faça os seguintes passos:
 
 1. Acrescente a URL '/wp-admin/'
 2. Realize o login com as seguintes credenciais:
