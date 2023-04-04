@@ -27,3 +27,17 @@ O sistema foi totalmente desenvolvido em _PHP_ com _MySQL_. Utilizado o framewor
 - Página Sobre a História da Instituição:
 ![Página Sobre a História da Instituição](https://user-images.githubusercontent.com/44526943/229583132-7b588ccc-edd8-4bf2-834e-90bc9f2862bd.png)
 
+## Como rodar:
+
+1. Crie o banco de dados na sua máquina local com o nome de etecsjc.
+2. Rode o arquivo etecsjc.sql que se encontra na raiz do repositório.
+3. Cole os todos os arquivos do repositório em seu servidor.
+4. Acesse para conferir se está tudo certo.
+
+- Caso queira acessar a area admin, faça os seguintes passos:
+
+1. Acrescente a URL '/wp-admin/'
+2. Realize o login com as seguintes credenciais:
+
+  - Usuário: adminSiteEtec
+  - Senha: teste
